@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Blagovest Petrov&#39;s blog">
+    <title>Virtualize a broken Windows XP machine with KVM or Xen, Part1 - Blagovest Petrov&#39;s blog</title>
+    <meta name="author" content="Blagovest Petrov">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="There are still online many dirty legacy PCs which cannot be reinstalled. The most common problems are that they are installed with a special software and the CDs are lost or a license problems.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Virtualize a broken Windows XP machine with KVM or Xen, Part1">
+<meta property="og:url" content="http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/index.html">
+<meta property="og:site_name" content="Blagovest Petrov's blog">
+<meta property="og:description" content="There are still online many dirty legacy PCs which cannot be reinstalled. The most common problems are that they are installed with a special software and the CDs are lost or a license problems.">
+<meta property="og:image" content="http://farm4.staticflickr.com/3217/2423244723_f0cff8ddf1.jpg">
+<meta property="og:image" content="http://img.dxcdn.com/productimages/sku_226847_1.jpg">
+<meta property="og:image" content="http://petrovs.info/images/WinXPVirtRecovery/1.png">
+<meta property="og:image" content="http://petrovs.info/images/WinXPVirtRecovery/4.png">
+<meta property="og:image" content="http://petrovs.info/images/WinXPVirtRecovery/2.png">
+<meta property="og:image" content="http://petrovs.info/images/WinXPVirtRecovery/3.png">
+<meta property="og:image" content="http://petrovs.info/images/WinXPVirtRecovery/5.png">
+<meta property="og:image" content="http://petrovs.info/images/WinXPVirtRecovery/5.png">
+<meta property="og:updated_time" content="2017-01-03T14:07:01.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Virtualize a broken Windows XP machine with KVM or Xen, Part1">
+<meta name="twitter:description" content="There are still online many dirty legacy PCs which cannot be reinstalled. The most common problems are that they are installed with a special software and the CDs are lost or a license problems.">
+<meta name="twitter:image" content="http://farm4.staticflickr.com/3217/2423244723_f0cff8ddf1.jpg">
+<meta name="twitter:creator" content="@eniac111">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=640"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-jmppwtxqojdd59fujmtahmifbyjlghgbsyo4iyb4qt6wnumuaxijkggtpdo9.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44632309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Blagovest Petrov&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">Blagovest Petrov</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">Github</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://linkedin.com/in/blpetrov" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                    <span class="sidebar-button-desc">LinkedIn</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:blagovest@petrovs.info" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Virtualize a broken Windows XP machine with KVM or Xen, Part1
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Sun Nov 03 2013 09:48:00 GMT+0200">
+	
+		    Nov 03, 2013
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/KVM-Windows-Virtualization-Recovery-IT/">KVM Windows Virtualization Recovery IT</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>There are still online many dirty legacy PCs which cannot be reinstalled. The most common problems are that they are installed with a special software and the CDs are lost or a license problems.</p>
+<a id="more"></a>
+<p><a href="http://www.flickr.com/photos/j_aroche/2423244723/" title="Maquinas sucias by Javier Aroche, on Flickr" target="_blank" rel="external"><img src="http://farm4.staticflickr.com/3217/2423244723_f0cff8ddf1.jpg" width="220" height="294" alt="Maquinas sucias" align="left"></a></p>
+<p>But what will happen when your zombie Durom 1300 dies? And your boss wants to use the accounting software ASAP.. The best scenario is when your HDD is healthy :)</p>
+<p>First, you shoud find a cheap HDD -&gt; USB converter. This is the clearest solution because I don’t want to turn off my virtual hypervisors and probably, the old machine would have an IDE HDDs. Chinese combined IDE/SATA -&gt; USB converters can be found for 15-16$.</p>
+<p><br> <br><br> <br></p>
+<div style="text-align:center"><br><img id="converter" src="http://img.dxcdn.com/productimages/sku_226847_1.jpg" style="border-width:0px;" width="200" height="300"><br><br><br>This is the one I’m using..<br></div>
+
+<p>##IMPORTANT!!! The old PC’s are too dirty and their cases are sharp and dangerous! You should have a <a href="http://en.wikipedia.org/wiki/DPT_vaccine" target="_BLANK">DPT vaccine</a> and suitable protective clothing!!!</p>
+<p>The HDD must be put on a PC with a hardware acceleration and KVM installed. In my case, my personal laptop was the salvation. I prepared a dummy VM with virt-manager, just to generate the XML file for libvirt. Use the simplest configuration. WinXP runs on an old hardware… Here are some steps in images:</p>
+<div style="text-align:center"><br><img id="Virt-Manager-1" src="/images/WinXPVirtRecovery/1.png" style="border-width:0px;"><br><br><br>…<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-4" src="/images/WinXPVirtRecovery/4.png" style="border-width:0px;"><br><br><br>Just one CPU with 1024Mb Ram is OK<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-2" src="/images/WinXPVirtRecovery/2.png" style="border-width:0px;"><br><br><br>It’s not necessary to have WinXP iso. Use something just to generate the XML for LibVirt.<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-3" src="/images/WinXPVirtRecovery/3.png" style="border-width:0px;"><br><br><br>The disk is also not revelant. It will be removed after the configuration.<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-5" src="/images/WinXPVirtRecovery/5.png" style="border-width:0px;"><br><br><br>Better use i686<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-5" src="/images/WinXPVirtRecovery/5.png" style="border-width:0px;"><br><br><br>Force off the machine after this window and open the terminal.<br></div>
+
+
+<p>In the terminal, type <strong>$virsh dumpxml WinXp &gt; WinXp.xml</strong> . Open the generated text file with your text editor and find this stanzas:</p>
+<figure class="highlight xml"><figcaption><span>WinXp.xml Before..</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">disk</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">device</span>=<span class="string">'disk'</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">driver</span> <span class="attr">name</span>=<span class="string">'qemu'</span> <span class="attr">type</span>=<span class="string">'qcow2'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">file</span>=<span class="string">'/home/vms/WinXP.img'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">dev</span>=<span class="string">'hda'</span> <span class="attr">bus</span>=<span class="string">'ide'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">'ide0-0-0'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">'drive'</span> <span class="attr">controller</span>=<span class="string">'0'</span> <span class="attr">bus</span>=<span class="string">'0'</span> <span class="attr">target</span>=<span class="string">'0'</span> <span class="attr">unit</span>=<span class="string">'0'</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">disk</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">disk</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">device</span>=<span class="string">'cdrom'</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">driver</span> <span class="attr">name</span>=<span class="string">'qemu'</span> <span class="attr">type</span>=<span class="string">'raw'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">file</span>=<span class="string">'/home/vms/xp64.iso'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">dev</span>=<span class="string">'hdc'</span> <span class="attr">bus</span>=<span class="string">'ide'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">readonly</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">'ide0-1-0'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">'drive'</span> <span class="attr">controller</span>=<span class="string">'0'</span> <span class="attr">bus</span>=<span class="string">'1'</span> <span class="attr">target</span>=<span class="string">'0'</span> <span class="attr">unit</span>=<span class="string">'0'</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">disk</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Remove the whole stanza about the CD Rom and change the disk configuration like this:</p>
+<figure class="highlight xml"><figcaption><span>WinXp.xml After..</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">disk</span> <span class="attr">type</span>=<span class="string">'block'</span> <span class="attr">device</span>=<span class="string">'disk'</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">driver</span> <span class="attr">name</span>=<span class="string">'qemu'</span> <span class="attr">type</span>=<span class="string">'raw'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">dev</span>=<span class="string">'/dev/sdX'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">dev</span>=<span class="string">'hda'</span> <span class="attr">bus</span>=<span class="string">'ide'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">'drive'</span> <span class="attr">controller</span>=<span class="string">'0'</span> <span class="attr">bus</span>=<span class="string">'0'</span> <span class="attr">target</span>=<span class="string">'0'</span> <span class="attr">unit</span>=<span class="string">'0'</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">disk</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>/dev/sdX</strong> must be your hard drive, connected with the chinese gadget. Make sure it’s not mounted on the host system. Now your XP machine should run directly from the hard drive.</p>
+<p>###Converting the hard drive to a virtual image..</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/11/08/virtualize-a-broken-windows-xp-machine-with-kvm-or-xen/"  data-tooltip="Virtualize a broken Windows XP machine with KVM or Xen, Part2">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/10/28/my-presentation-on-openfest-2013/" data-tooltip="My presentation on OpenFest 2013">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Blagovest Petrov. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/11/08/virtualize-a-broken-windows-xp-machine-with-kvm-or-xen/"  data-tooltip="Virtualize a broken Windows XP machine with KVM or Xen, Part2">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/10/28/my-presentation-on-openfest-2013/" data-tooltip="My presentation on OpenFest 2013">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+        
+            <h4 id="about-card-name">Blagovest Petrov</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Sofia, Bulgaria
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-iaehp5thor0pbqgcyblrct5rsvhmqrvbuwm0kto0ectv5cpss8ylmorjlrhv.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/';
+                 this.page.identifier = '2013/11/03/virtualize-broken-windows-xp-machine/';
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'blagosblog';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

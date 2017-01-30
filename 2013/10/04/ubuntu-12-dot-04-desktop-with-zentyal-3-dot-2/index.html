@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Blagovest Petrov&#39;s blog">
+    <title>Ubuntu 12.04 Desktop with Zentyal 3.2 - Blagovest Petrov&#39;s blog</title>
+    <meta name="author" content="Blagovest Petrov">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Zentyal, The Linux Small Business Server includes the most important services for a small or medium company. Most of the services are integrated around OpenLdap. Since version 3.1, Zentyal uses Samba4">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Ubuntu 12.04 Desktop with Zentyal 3.2">
+<meta property="og:url" content="http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/index.html">
+<meta property="og:site_name" content="Blagovest Petrov's blog">
+<meta property="og:description" content="Zentyal, The Linux Small Business Server includes the most important services for a small or medium company. Most of the services are integrated around OpenLdap. Since version 3.1, Zentyal uses Samba4">
+<meta property="og:updated_time" content="2017-01-03T14:07:01.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 12.04 Desktop with Zentyal 3.2">
+<meta name="twitter:description" content="Zentyal, The Linux Small Business Server includes the most important services for a small or medium company. Most of the services are integrated around OpenLdap. Since version 3.1, Zentyal uses Samba4">
+<meta name="twitter:creator" content="@eniac111">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=640"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-jmppwtxqojdd59fujmtahmifbyjlghgbsyo4iyb4qt6wnumuaxijkggtpdo9.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44632309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Blagovest Petrov&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">Blagovest Petrov</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">Github</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://linkedin.com/in/blpetrov" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                    <span class="sidebar-button-desc">LinkedIn</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:blagovest@petrovs.info" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Ubuntu 12.04 Desktop with Zentyal 3.2
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Oct 04 2013 19:01:00 GMT+0300">
+	
+		    Oct 04, 2013
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Zentyal/">Zentyal</a>, <a class="category-link" href="/categories/Zentyal/System-Administration/">System Administration</a>, <a class="category-link" href="/categories/Zentyal/System-Administration/LDAP/">LDAP</a>, <a class="category-link" href="/categories/Zentyal/System-Administration/LDAP/NFS/">NFS</a>, <a class="category-link" href="/categories/Zentyal/System-Administration/LDAP/NFS/Ubuntu/">Ubuntu</a>, <a class="category-link" href="/categories/Zentyal/System-Administration/LDAP/NFS/Ubuntu/IT/">IT</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="http://zentyal.org" target="_blank" rel="external">Zentyal</a>, The Linux Small Business Server includes the most important services for a small or medium company. Most of the services are integrated around OpenLdap. Since version 3.1, Zentyal uses Samba4 as a Directory and File Sharing service.</p>
+<a id="more"></a>
+<p>I’m maintaining the computers in the Francophone center in University of Sofia. Everything in this place is with Ubuntu workstations.</p>
+<p>There was a major hardware update this year. We got new servers, workstations and laptops. </p>
+<div align="center"><div class="g-post" data-href="https://plus.google.com/112216091511383101131/posts/BW8jkHFox5N"></div></div>
+
+<p>Following the info from <a href="http://forum.zentyal.org/index.php?topic=12925.0" target="_blank" rel="external">this</a> forum topic, I installed Ubuntu 12.04 LTS for the desktops and Zentyal 3.2 as a Directory and file server. Home directories are on NFS share in Zentyal, so that the users can use their own profiles on any workstation. </p>
+<p>First I decided to use Centrify DC Express (<a href="https://help.ubuntu.com/community/DirectControl" target="_blank" rel="external">Documentation</a>) as an Active Directory client Samba shares, like in the forum topic. This type of setup gave me the   possibility to use Samba 4’s advanced directory options because CentrifyDC immitates M$ Windows client and the security of Samba. It seemed to work in the first test, but then bugs appeared. There are some privilege issues with Samba. For example, PulseAudio cannot initialize on boot because it cannot create the <em>~/.pulse</em> directory. There were the simmilar issues with Firefox on some of the profiles.</p>
+<p>Then I decided to use NFS with Centrify, but another issue appeared. Centrify makes UID and GID different than the ones in Zentyal and users cannot write to their own profiles. NFSv4 can solve this problem with remapping, but it’s still not documented and there’s a lack of information on internet. If you are interested in it, you can search for <em>“/etc/idmapd.conf”</em>. </p>
+<p>So, I choosed the standard LDAP setup, like in the forum topic and NFS. Well, <a href="https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/870874" target="_blank" rel="external">another bug</a> appeared but it can be fixed with a small hack. </p>
+<p>You must comment the “If” statement about gsettings (dconf) in <em>/etc/X11/Xsession.d/90qt-a11y</em> :</p>
+<figure class="highlight bash"><figcaption><span>Before (/etc/X11/Xsession.d/90qt-a11y)</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- sh -*-</span></div><div class="line"><span class="comment"># Xsession.d script to set the QT_ACCESSIBILITY env variable when accessibility</span></div><div class="line"><span class="comment"># is enabled.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># This file is sourced by Xsession(5), not executed.</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ -x <span class="string">"/usr/bin/gsettings"</span> ]; <span class="keyword">then</span></div><div class="line">        a11y_enabled=$(gsettings get org.gnome.desktop.interface toolkit-accessibility)</div><div class="line">        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$a11y_enabled</span>"</span> = <span class="string">"true"</span> ]; <span class="keyword">then</span></div><div class="line">                <span class="built_in">export</span> QT_ACCESSIBILITY=1</div><div class="line">        <span class="keyword">fi</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>After (/etc/X11/Xsession.d/90qt-a11y)</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- sh -*-</span></div><div class="line"><span class="comment"># Xsession.d script to set the QT_ACCESSIBILITY env variable when accessibility</span></div><div class="line"><span class="comment"># is enabled.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># This file is sourced by Xsession(5), not executed.</span></div><div class="line"></div><div class="line"><span class="comment">#if [ -x "/usr/bin/gsettings" ]; then</span></div><div class="line"><span class="comment">#        a11y_enabled=$(gsettings get #org.gnome.desktop.interface toolkit-accessibility)</span></div><div class="line"><span class="comment">#        if [ "$a11y_enabled" = "true" ]; then</span></div><div class="line"><span class="comment">#                export QT_ACCESSIBILITY=1</span></div><div class="line"><span class="comment">#        fi</span></div><div class="line"><span class="comment">#fi</span></div></pre></td></tr></table></figure>
+<p>According to the forum topic, you need to install these packages on the Ubuntu client to run LDAP:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install install libnss-ldap libpam-ldap libpam-mount  winbind smbclient cifs-utils ldap-utils <span class="comment">#Ignore all requests, just hit Enter</span></div></pre></td></tr></table></figure>
+<p>And for NFS:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nfs-common libpam-mount</div></pre></td></tr></table></figure>
+<p>Then, create again the file <em>/etc/ldap.conf</em> :</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">base dc=neo,dc=<span class="keyword">lan</span></div><div class="line"></div><div class="line">uri ldap://<span class="number">10.1</span>.<span class="number">100.1</span>:<span class="number">390</span></div><div class="line"></div><div class="line">ldap_version <span class="number">3</span></div><div class="line"></div><div class="line">binddn <span class="keyword">cn</span>=zentyalro,dc=neo,dc=<span class="keyword">lan</span></div><div class="line">bindpw jw4xF8KRS@IsEqxCbt=<span class="number">0</span></div><div class="line"></div><div class="line">scope sub</div><div class="line">bind_policy soft</div><div class="line">pam_password md5</div><div class="line"></div><div class="line">nss_base_passwd         <span class="keyword">ou</span>=Users,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_base_passwd         <span class="keyword">ou</span>=Computers,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_base_shadow         <span class="keyword">ou</span>=Users,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_base_group          <span class="keyword">ou</span>=Groups,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_schema              rfc2307bis</div><div class="line">nss_map_attribute uniqueMember member</div><div class="line">nss_reconnect_tries <span class="number">2</span></div><div class="line">nss_initgroups_ignoreusers avahi,avahi-autoipd,backup,bin,colord,daemon,games,gnats,hplip,irc,kernoops,libuuid,lightdm,<span class="keyword">list</span>,<span class="keyword">lp</span>,mail,man,messagebus,news,proxy,pulse,root,rtkit,saned,speech-dispatcher,sshd,<span class="keyword">sync</span>,sys,syslog,usbmux,uucp,whoopsie,www-data</div></pre></td></tr></table></figure>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>base - see “Users and Groups - LDAP settings - LDAP information - Base DN (in the Zentyal web frontend)</li>
+<li>uri - use the IP address of your Zentyal box and Port 390 to reach Ldap</li>
+<li>binddn - run grep ^binddn /etc/ldap.conf on your Zentyal server’s shell</li>
+<li>bindpw - run grep ^bindpw /etc/ldap.conf on your Zentyal server’s shell</li>
+</ul>
+<p>Create a link for the <em>ldapsearch</em> tool:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo ln <span class="_">-s</span> /etc/ldap.conf  /etc/ldap/ldap.conf</div></pre></td></tr></table></figure>
+<p>For NSS: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo auth-client-config -t nss -p lac_ldap</div></pre></td></tr></table></figure>
+<p>You can test the configuration with <em>$id USERNAME</em> where the username must be from the Active Directory.</p>
+<p>To mount the home folder you need to insert this line in your _/etc/security/pam<em>mount.conf</em> between <em>\&lt;!– Volume definitions –></em> tags:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">volume</span> <span class="attr">fstype</span>=<span class="string">"nfs"</span> <span class="attr">server</span>=<span class="string">"yourserver.local"</span> <span class="attr">path</span>=<span class="string">"/home/%(USER)"</span> <span class="attr">mountpoint</span>=<span class="string">"~"</span> <span class="attr">options</span>=<span class="string">"rsize=8192,wsize=8192,timeo=14,intr,proto=tcp,nolock"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>It’s better to use TCP because sometimes transferring big files freezes.</li>
+<li>Nolock disables file locking. According to the manpages, this option is deprecated and is required just for an older servers. I think it’s better to be used because sometimes Firefox locks it’s profile when the session freezes and the users cannot login from other machines.</li>
+<li>rsize and wsize specifies the chunks of data that the client and server pass back and forth to each other.</li>
+</ul>
+<p>This configuration works for me, but maybe the <em>options=</em> tag must be in <em>\<mntoptions\></mntoptions\></em> tag.</p>
+<p>###About the server</p>
+<p>Zentyal is well documented. You can install and configure all the needed components in ~30 minutes. Just check <a href="http://zentyal.org" target="_blank" rel="external">Zentyal.org</a>.<br>Additionaly, you need the configure the NFS server. These packages must be installed:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nfs-kernel-server nfs-common</div></pre></td></tr></table></figure>
+<p>Then, you must configure the <em>/etc/exports</em> file. Just add this line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/home   10.10.10.0/24(rw,sync,no_subtree_check)</div></pre></td></tr></table></figure>
+<p>Where 10.10.10.0/24 must be your network and netmask.</p>
+<p>There are many advanced NFS options. Experiment, if you want :) NFSv4 even supports Kerberos authentication, but it’s still undocumented.</p>
+<p>Everything must work with this setup. If you login to the client with AD username, you can see this:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">cfadmin@lenovo5:~$ su blagovest</div><div class="line">Mot de passe : </div><div class="line">blagovest@lenovo5:/home/cfadmin$ <span class="built_in">cd</span></div><div class="line">blagovest@lenovo5:~$ df -h</div><div class="line">df: «/var/lib/lightdm/.gvfs»: Permission non accordée</div><div class="line">Sys. de fichiers      Taille Utilisé Dispo Uti% Monté sur</div><div class="line">/dev/sda1               230G    6,3G  212G   3% /</div><div class="line">udev                    1,9G    4,0K  1,9G   1% /dev</div><div class="line">tmpfs                   744M    896K  743M   1% /run</div><div class="line">none                    5,0M       0  5,0M   0% /run/lock</div><div class="line">none                    1,9G    144K  1,9G   1% /run/shm</div><div class="line">cgroup                  1,9G       0  1,9G   0% /sys/fs/cgroup</div><div class="line">cf.lo:/home/blagovest   351G    2,4G  331G   1% /home/blagovest</div><div class="line">blagovest@lenovo5:~$ </div></pre></td></tr></table></figure>
+<p>The home directory doesn’t unmount sometimes, but it can be fine configured from _/etc/security_pam<em>mount.conf</em> . I will be glad if someone fix it :)</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/10/19/horse-dummy-school-project/"  data-tooltip="Horse - dummy school project">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Blagovest Petrov. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/10/19/horse-dummy-school-project/"  data-tooltip="Horse - dummy school project">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+        
+            <h4 id="about-card-name">Blagovest Petrov</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Sofia, Bulgaria
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-iaehp5thor0pbqgcyblrct5rsvhmqrvbuwm0kto0ectv5cpss8ylmorjlrhv.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/';
+                 this.page.identifier = '2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/';
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'blagosblog';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

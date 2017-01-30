@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Blagovest Petrov's blog]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://petrovs.info/"/>
+  <updated>2017-01-30T12:23:17.906Z</updated>
+  <id>http://petrovs.info/</id>
+  
+  <author>
+    <name><![CDATA[Blagovest Petrov]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Open data of SofiaTraffic]]></title>
+    <link href="http://petrovs.info/2017/01/03/Open-data-of-SofiaTraffic/"/>
+    <id>http://petrovs.info/2017/01/03/Open-data-of-SofiaTraffic/</id>
+    <published>2017-01-03T14:27:13.000Z</published>
+    <updated>2017-01-30T12:23:17.906Z</updated>
+    <content type="html"><![CDATA[<p>Quick post, first for 2017.<br>I got an Android car PC computer for Christmas and the hacking ideas began to appear.<br>Because most the buffer parkings near the Sofia subway stations are full from early in the morning, I always have to have to do a lot of maneuvers with the car. It would be great if the car PC warns me about the free places around 1km away from the parking every morning, based on the GPS. I tried to find something some usable open information about the parkings on internet but there is nothing except this application for Android: <a href="https://play.google.com/store/apps/details?id=bg.cgm.parkingboards&amp;hl=bg" target="_blank" rel="external">София Паркинг</a>. It’s only showing the free places in some blue zone parkigs in the centre of Sofia. The application is usable but not suitable for 2-din car PC. So, it wasn’t so hard to find from where it gets the data:</p>
+<h3 id="https-213-240-235-145-web-site-service-rest-parkingBoardsRequest-allFreePlaces"><a href="#https-213-240-235-145-web-site-service-rest-parkingBoardsRequest-allFreePlaces" class="headerlink" title="https://213.240.235.145/web-site-service/rest/parkingBoardsRequest/allFreePlaces"></a><em><a href="https://213.240.235.145/web-site-service/rest/parkingBoardsRequest/allFreePlaces" target="_blank" rel="external">https://213.240.235.145/web-site-service/rest/parkingBoardsRequest/allFreePlaces</a></em></h3><p>The certificate of the page is expired but it’s not a big deal. The application looks a bit unmaintained. The last update was in 2014. The page returns this JSON:</p>
+<figure class="highlight json"><figcaption><span>Example parking data</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"parkingRes"</span>: [</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"1"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"71"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"2"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"FULL"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"3"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"FULL"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"4"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"2"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"5"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"8"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"6"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"12"</span></div><div class="line">		&#125;</div><div class="line">	]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The codes refers to the following locations:</p>
+<ol>
+<li>Храм-паметник Ал. Невски</li>
+<li>пл. Княз Александър I</li>
+<li>бул. П. Евтимий</li>
+<li>пл. Народно събрание</li>
+<li>ул. Гурко - Телефонна палата</li>
+<li>бул. Ал. Стамболийски</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Quick post, first for 2017.<br>I got an Android car PC computer for Christmas and the hacking ideas began to appear.<br>Because most the ]]>
+    </summary>
+    
+      <category term="OpenData, apis, skgt, PublicTransport" scheme="http://petrovs.info/tags/OpenData-apis-skgt-PublicTransport/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[HAProxy build with more Debian-like configuration]]></title>
+    <link href="http://petrovs.info/2016/01/07/HAProxy-build-with-more-Debian-like-configuration/"/>
+    <id>http://petrovs.info/2016/01/07/HAProxy-build-with-more-Debian-like-configuration/</id>
+    <published>2016-01-07T12:22:45.000Z</published>
+    <updated>2017-01-03T14:07:01.151Z</updated>
+    <content type="html"><![CDATA[<p>I made a HAProxy build with Debian-style config file because some of the <em>haproxy.cfg</em> files on my servers became really big.<br>HAProxy has an option to include multiple config files as a command line arguent, like this: <em>haproxy -f haproxy.cfg -f haproxy2.cfg -f…etc</em>. </p>
+<a id="more"></a>
+<img src="/2016/01/07/HAProxy-build-with-more-Debian-like-configuration/haproxy.png" alt="HAProxy /etc directory tree" title="HAProxy /etc directory tree">
+<p>So, the algoritm is like:</p>
+<ol>
+<li>Read /etc/haproxy/haproxy.cfg (The global settings)</li>
+<li>Read /etc/haproxy/haproxy.cfg.d/http/http.cfg (Global settings for HTTP)</li>
+<li>Read /etc/haproxy/haproxy/cfg.d/http/frontend-* (HTTP frontends)</li>
+<li>Read /etc/haproxy/haproxy.cfg.d/http/backend-* (HTTP backends)</li>
+<li>Read /etc/haproxy/haproxy.cfg.d/tcp/tcp.cfg (Global settings for TCP)<br>… and the same as for HTTP</li>
+</ol>
+<h3 id="TODO"><a href="#TODO" class="headerlink" title="TODO:"></a>TODO:</h3><ul>
+<li>PPA:<br>I have some problems with <em>Quilt</em> and <em>debuild</em> but <em>dpkg-buildpackage</em> runs?</li>
+<li>Systemd script.</li>
+</ul>
+<h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a><a href="https://github.com/eniac111/haproxy-debianconfig/releases/tag/1.6.3" target="_blank" rel="external">Download</a></h2>]]></content>
+    <summary type="html">
+    <![CDATA[<p>I made a HAProxy build with Debian-style config file because some of the <em>haproxy.cfg</em> files on my servers became really big.<br>HAProxy has an option to include multiple config files as a command line arguent, like this: <em>haproxy -f haproxy.cfg -f haproxy2.cfg -f…etc</em>. </p>]]>
+    
+    </summary>
+    
+      <category term="HAProxy" scheme="http://petrovs.info/tags/HAProxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Example of MySQL incremental backup with XtraBackup]]></title>
+    <link href="http://petrovs.info/2016/01/07/Example-of-MySQL-incremental-backup-with-XtraBackup/"/>
+    <id>http://petrovs.info/2016/01/07/Example-of-MySQL-incremental-backup-with-XtraBackup/</id>
+    <published>2016-01-07T09:54:27.000Z</published>
+    <updated>2017-01-03T14:07:01.151Z</updated>
+    <content type="html"><![CDATA[<p>Percona’s <a href="https://www.percona.com/doc/percona-xtrabackup/2.3/index.html" target="_blank" rel="external">XtraBackup</a> is really good solution for incremental backups if small or large MySQL/MariaDB databases. Mysqldump is really slow and is not downtimeless.<br>In our case, we need two week history of every day. Every Sunday the backup will be full and the rest of the days, backups will be incremental, based on Sunday’s full backup. The backups will be placed in a folder named <em>current_week</em>. Every Sunday, the folder will be renamed to <em>last_week</em> and new, empty <em>current_week</em> will be created before the full backup.</p>
+<a id="more"></a>
+<p>Here is the script: </p>
+<script src="//gist.github.com/eniac111/b37297e83cd5fa99e59e.js"></script>
+<p>It “wants” the day of the week as the first parameter, and the mysql password as a second parameter, like this:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./backup-mysql.sh Sunday 12345</div><div class="line">./backup-mysql.sh Monday 12345</div></pre></td></tr></table></figure>
+<p>Put it in <em>/usr/local/bin/backup-mysql</em> for example and make it executable. Here is an example cron config, running every day at 2:00 AM:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">0 2 * * 0 /usr/<span class="built_in">local</span>/bin/backup-mysql Sunday 12345 &gt;/dev/null 2&gt;&amp;1</div><div class="line">0 2 * * 1 /usr/<span class="built_in">local</span>/bin/backup-mysql Monday 12345 &gt;/dev/null 2&gt;&amp;1</div><div class="line">0 2 * * 2 /usr/<span class="built_in">local</span>/bin/backup-mysql Tuesday 12345 &gt;/dev/null 2&gt;&amp;1</div><div class="line">0 2 * * 3 /usr/<span class="built_in">local</span>/bin/backup-mysql Wednesday 12345 &gt;/dev/null 2&gt;&amp;1</div><div class="line">0 2 * * 4 /usr/<span class="built_in">local</span>/bin/backup-mysql Thursday 12345 &gt;/dev/null 2&gt;&amp;1</div><div class="line">0 2 * * 5 /usr/<span class="built_in">local</span>/bin/backup-mysql Friday 12345 &gt;/dev/null 2&gt;&amp;1</div><div class="line">0 2 * * 6 /usr/<span class="built_in">local</span>/bin/backup-mysql Saturday 12345 &gt;/dev/null 2&gt;&amp;1</div></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Percona’s <a href="https://www.percona.com/doc/percona-xtrabackup/2.3/index.html">XtraBackup</a> is really good solution for incremental backups if small or large MySQL/MariaDB databases. Mysqldump is really slow and is not downtimeless.<br>In our case, we need two week history of every day. Every Sunday the backup will be full and the rest of the days, backups will be incremental, based on Sunday’s full backup. The backups will be placed in a folder named <em>current_week</em>. Every Sunday, the folder will be renamed to <em>last_week</em> and new, empty <em>current_week</em> will be created before the full backup.</p>]]>
+    
+    </summary>
+    
+      <category term="MySQL MariaDB XtraBAckup Percona" scheme="http://petrovs.info/tags/MySQL-MariaDB-XtraBAckup-Percona/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Using Ansible with pass]]></title>
+    <link href="http://petrovs.info/2016/01/03/Using-Ansible-with-pass/"/>
+    <id>http://petrovs.info/2016/01/03/Using-Ansible-with-pass/</id>
+    <published>2016-01-03T00:13:54.000Z</published>
+    <updated>2017-01-03T14:07:01.147Z</updated>
+    <content type="html"><![CDATA[<p>To work with the root user and ssh keys is a common practice in the Ansible community. Another variant is to use a “deploy” user with the same password on every machine.<br>Another option is to use <a href="https://therealmarv.com/ansible-vault-file-handling" target="_blank" rel="external">Ansible Vault to encrypt the yaml files</a>. or to use a password manager. It’s never a good idea to keep passwords, private keys and other sensual data to the source code repository.</p>
+<a id="more"></a>
+<h2 id="Pass"><a href="#Pass" class="headerlink" title="Pass"></a>Pass</h2><p>I use <a href="http://www.passwordstore.org/" target="_blank" rel="external">Pass</a> for all of my personal or company passwords for almost an year. It’s like a Keepass but simpler. The project follows the UNIX philosophy “Do One Thing and Do It Well”.<br>Pass stores every password in a PGP encrypted file in a directory tree. It has also Git integration and Bash/Zsh completion. Really cool! Check the project page or the Man for additional documentation. There was a lighting talk from the 32c3 congress this year. I’ll append it when it appears online. </p>
+<h2 id="Reading-sudo-passwords-from-Pass-with-Ansible"><a href="#Reading-sudo-passwords-from-Pass-with-Ansible" class="headerlink" title="Reading sudo passwords from Pass with Ansible"></a>Reading sudo passwords from Pass with Ansible</h2><p>It’s really simple. Just use “Lookup” with pipe inside your host_vars/examplehost file, like this:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">ansible_sudo_pass:</span> <span class="string">"&#123; &#123; lookup('pipe', 'pass show Inventoryname/hosts/examplehost/myusername') &#125;&#125;"</span></div></pre></td></tr></table></figure>
+<p>And append <em>sudo: yes</em> to every command in the tasks, like this:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">- name:</span> Just a test task</div><div class="line"><span class="attr">  copy:</span> src=/etc/passwd dest=/tmp/passwdfile</div><div class="line"><span class="attr">  sudo:</span> <span class="literal">yes</span></div></pre></td></tr></table></figure>
+<p>You should also use gpg-agent. Otherwise, Ansible will ask for the gpg key password for each operation.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>To work with the root user and ssh keys is a common practice in the Ansible community. Another variant is to use a “deploy” user with the same password on every machine.<br>Another option is to use <a href="https://therealmarv.com/ansible-vault-file-handling">Ansible Vault to encrypt the yaml files</a>. or to use a password manager. It’s never a good idea to keep passwords, private keys and other sensual data to the source code repository.</p>]]>
+    
+    </summary>
+    
+      <category term="ansible, pass, passwordstore, DevOps, Security" scheme="http://petrovs.info/tags/ansible-pass-passwordstore-DevOps-Security/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[My way to auto update "Let's Encrypt" certs without downtime.]]></title>
+    <link href="http://petrovs.info/2015/12/27/My-way-to-auto-update-Lets-Encrypt/"/>
+    <id>http://petrovs.info/2015/12/27/My-way-to-auto-update-Lets-Encrypt/</id>
+    <published>2015-12-27T00:59:56.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>It’s been a while since my last post here. This is my first post with the new platform - <a href="https://hexo.io" target="_blank" rel="external">Hexo</a>. It’s faster and simpler than Octopress and it’s not Ruby but nevermind…</p>
+<p>The whole concept with the Certification Authorities is completely broken but we don’t have something better which is working. A world with fully encrypted web is a really a good idea since the whole internet traffic is monitored by governments and other private organizations. <a href="https://letsencrypt.org" target="_blank" rel="external">Let’s encrypt</a> is an attempt for that. It’s a colaborative project between Linux foundation, EFF and some other organizations.</p>
+<a id="more"></a>
+<p>They are providing free (completely free!) certificates with 3 months of validity. After that time, the certificates can be updated again.</p>
+<h2 id="Signing-and-delivery-of-the-certificates"><a href="#Signing-and-delivery-of-the-certificates" class="headerlink" title="Signing and delivery of the certificates"></a>Signing and delivery of the certificates</h2><p>Let’s encrypt is using the <a href="https://github.com/letsencrypt/acme-spec" target="_blank" rel="external">ACME</a> (Automated Certificate Management Environment) protocol which defines automatically obtaining of certificates. More information about the protocol can be found at the <a href="https://letsencrypt.org/howitworks/technology/" target="_blank" rel="external">Let’s Encrypt - How it works page</a>.</p>
+<h2 id="So-let’s-start-the-technical-part"><a href="#So-let’s-start-the-technical-part" class="headerlink" title="So, let’s start the technical part"></a>So, let’s start the technical part</h2><p>In this setup I’ll use Ubuntu 14.04 with HAProxy for load balancing and managing the traffic for all of the domains.</p>
+<h3 id="Install-HAProxy"><a href="#Install-HAProxy" class="headerlink" title="Install HAProxy:"></a>Install HAProxy:</h3><p>HAProxy will directly deliver bind the HTTPS content but we need SNI checks for the Acme client. So, it’s a bit bizzare. We will have a loop inside HAPproxy. A TCP proxy frontend which is proxying a backend from localhost to the HTTPS proxy frontend.</p>
+<p>TCP frontend -&gt; HTTPS backend/ACME client backend -&gt; HTTPS frontend -&gt; Application Servers HTTP backends</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y software-properties-common</div><div class="line">sudo apt-add-repository ppa:vbernat/haproxy-1.5</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install -y haproxy</div></pre></td></tr></table></figure>
+<h4 id="Configure-HAProxy"><a href="#Configure-HAProxy" class="headerlink" title="Configure HAProxy:"></a>Configure HAProxy:</h4><p>Let’s start with the default global config:</p>
+<figure class="highlight crystal"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">global</div><div class="line">        log /dev/log    local0</div><div class="line">        log /dev/log    local1 notice</div><div class="line">        chroot /var/<span class="class"><span class="keyword">lib</span>/<span class="title">haproxy</span></span></div><div class="line">        tune.bufsize <span class="number">131072</span></div><div class="line">        user haproxy</div><div class="line">        group haproxy</div><div class="line">        daemon</div><div class="line"></div><div class="line">        <span class="comment"># Default SSL material locations</span></div><div class="line">        ca-base /srv/certs</div><div class="line">        crt-base /srv/certs</div><div class="line"></div><div class="line">        <span class="comment"># Default ciphers to use on SSL-enabled listening sockets.</span></div><div class="line">        <span class="comment"># For more information, see ciphers(1SSL).</span></div><div class="line">        ssl-default-bind-ciphers kEECDH+aRSA+<span class="symbol">AES:</span>kRSA+<span class="symbol">AES:</span>+<span class="symbol">AES256:</span>!RC4-<span class="symbol">SHA:</span>!<span class="symbol">kEDH:</span>!<span class="symbol">LOW:</span>!<span class="symbol">EXP:</span>!<span class="symbol">MD5:</span>!<span class="symbol">aNULL:</span>!eNULL</div><div class="line"></div><div class="line">        <span class="comment"># tunning</span></div><div class="line">        maxconn <span class="number">16384</span></div><div class="line"></div></pre></td></tr></table></figure>
+<p>Then, append the default configuration for the http/s frontends:</p>
+<figure class="highlight lsl"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">defaults http</div><div class="line">        log     global</div><div class="line">        mode    http</div><div class="line">        option  httplog</div><div class="line">        option  dontlognull</div><div class="line">        option forwardfor</div><div class="line">        option http-server-close</div><div class="line">        timeout connect <span class="number">5</span>s</div><div class="line">        timeout client  <span class="number">310</span>s</div><div class="line">        timeout server  <span class="number">310</span>s</div><div class="line">        errorfile <span class="number">400</span> /etc/haproxy/errors/<span class="number">400.</span>http</div><div class="line">        errorfile <span class="number">403</span> /etc/haproxy/errors/<span class="number">403.</span>http</div><div class="line">        errorfile <span class="number">408</span> /etc/haproxy/errors/<span class="number">408.</span>http</div><div class="line">        errorfile <span class="number">500</span> /etc/haproxy/errors/<span class="number">500.</span>http</div><div class="line">        errorfile <span class="number">502</span> /etc/haproxy/errors/<span class="number">502.</span>http</div><div class="line">        errorfile <span class="number">503</span> /etc/haproxy/errors/<span class="number">503.</span>http</div><div class="line">        errorfile <span class="number">504</span> /etc/haproxy/errors/<span class="number">504.</span>http</div></pre></td></tr></table></figure>
+<p>Setup the HTTP frontend. It will only refer the http requests to https:</p>
+<figure class="highlight stylus"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">frontend www-http</div><div class="line">        bind <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">80</span></div><div class="line">        reqadd X-Forwarded-Proto:\ http</div><div class="line">        option forwardfor</div><div class="line">	</div><div class="line">	<span class="selector-id">#ACLs</span></div><div class="line">	acl example_sites hdr(host) -<span class="selector-tag">i</span> example<span class="selector-class">.com</span> www<span class="selector-class">.example</span><span class="selector-class">.com</span></div><div class="line"></div><div class="line">	<span class="selector-id">#Redirects</span></div><div class="line">	redirect prefix https:<span class="comment">//cloud.grandcity-property.com if example_sites</span></div></pre></td></tr></table></figure>
+<p>Now, create the HTTPS frontend. The port must be different than 443.</p>
+<figure class="highlight stylus"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">frontend www-https</div><div class="line">	bind <span class="number">0.0</span>.<span class="number">0.0</span>:<span class="number">4443</span> ssl crt example<span class="selector-class">.com</span><span class="selector-class">.pem</span> crt www<span class="selector-class">.example</span><span class="selector-class">.com</span><span class="selector-class">.pem</span> crt ./ no-sslv3</div><div class="line">	reqadd X-Forwarded-Proto:\ https</div><div class="line">	option forwardfor</div><div class="line"></div><div class="line">	<span class="selector-id">#ACLs</span></div><div class="line">	acl example_sites hdr(host) -<span class="selector-tag">i</span> example<span class="selector-class">.com</span> www<span class="selector-class">.example</span><span class="selector-class">.com</span></div><div class="line">	</div><div class="line">	use_backend examplecom <span class="keyword">if</span> example_sites</div></pre></td></tr></table></figure>
+<p>Create the backend for example.com:</p>
+<figure class="highlight css"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">backend</span> <span class="selector-tag">examplecom</span></div><div class="line">	<span class="selector-tag">timeout</span> <span class="selector-tag">server</span> 30<span class="selector-tag">m</span></div><div class="line">	<span class="selector-tag">balance</span> <span class="selector-tag">leastconn</span></div><div class="line">	<span class="selector-tag">option</span> <span class="selector-tag">httpclose</span></div><div class="line">	<span class="selector-tag">option</span> <span class="selector-tag">forwardfor</span></div><div class="line">	<span class="selector-tag">cookie</span> <span class="selector-tag">JSESSIONID</span> <span class="selector-tag">prefix</span></div><div class="line">	<span class="selector-tag">server</span> <span class="selector-tag">node1</span> 192<span class="selector-class">.168</span><span class="selector-class">.0</span><span class="selector-class">.10</span><span class="selector-pseudo">:80</span> <span class="selector-tag">cookie</span> <span class="selector-tag">A</span> <span class="selector-tag">check</span></div></pre></td></tr></table></figure>
+<p>Now, the TCP Proxy part. TCP defaults:</p>
+<figure class="highlight applescript"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#### TCP Section</span></div><div class="line"></div><div class="line">defaults tcp</div><div class="line">        <span class="built_in">log</span>     <span class="keyword">global</span></div><div class="line">        mode tcp</div><div class="line">        option tcplog</div><div class="line">        <span class="keyword">timeout</span> connect <span class="number">10</span>s</div><div class="line">        <span class="keyword">timeout</span> client  <span class="number">600</span>s</div><div class="line">        <span class="keyword">timeout</span> server  <span class="number">600</span>s</div></pre></td></tr></table></figure>
+<p>The TCP frontend (listening on port 443:</p>
+<figure class="highlight applescript"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">frontend www-https-tcp</div><div class="line">        <span class="built_in">log</span> <span class="keyword">global</span></div><div class="line">        mode tcp</div><div class="line">        option tcplog</div><div class="line">        bind <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">443</span></div><div class="line">        tcp-request inspect-<span class="built_in">delay</span> <span class="number">5</span>s</div><div class="line">        tcp-request content accept <span class="keyword">if</span> &#123; req.ssl_hello_type <span class="number">1</span> &#125;</div><div class="line">        <span class="comment"># Matching all SNI names with *.acme.invalid</span></div><div class="line">        acl app_letsencrypt req.ssl_sni -m <span class="keyword">end</span> .acme.invalid</div><div class="line"></div><div class="line">        use_backend letsencrypt <span class="keyword">if</span> app_letsencrypt</div><div class="line"></div><div class="line">        <span class="comment"># sending everything that doesn't match *.acme.invalid to the HTTPS backend</span></div><div class="line">        default_backend bk_frontend_https_loop</div></pre></td></tr></table></figure>
+<p>And the backends for www-https-tcp:</p>
+<figure class="highlight x86asm"><figcaption><span>[/etc/haproxy/haproxy.cfg]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">backend bk_frontend_https_loop</div><div class="line">        log <span class="meta">global</span></div><div class="line">        mode tcp</div><div class="line">        <span class="meta">option</span> tcplog</div><div class="line">        server localserver <span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span>:<span class="number">4443</span></div><div class="line"></div><div class="line">backend letsencrypt</div><div class="line">        log <span class="meta">global</span></div><div class="line">        mode tcp</div><div class="line">        <span class="meta">option</span> tcplog</div><div class="line">        server letsencrypt <span class="number">0.0</span><span class="meta">.0</span><span class="meta">.0</span>:<span class="number">63443</span> #By <span class="meta">default</span>, Let<span class="string">'s encrypt works on 443.</span></div></pre></td></tr></table></figure>
+<p>The whole haproxy.cfg is in <a href="https://gist.github.com/eniac111/95ef382b545aa2d43dff" target="_blank" rel="external">this</a> gist.</p>
+<h3 id="Now-install-the-official-Let’s-encrypt-client"><a href="#Now-install-the-official-Let’s-encrypt-client" class="headerlink" title="Now, install the official Let’s encrypt client:"></a>Now, install the official Let’s encrypt client:</h3><p>Install git:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y git</div></pre></td></tr></table></figure></p>
+<p>Download the client:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/letsencrypt/letsencrypt /root/letsencrypt</div></pre></td></tr></table></figure></p>
+<p>And create the certificate for example.com and wwww.example.com:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/root/letsencrypt/letsencrypt-auto --email admin@example.com <span class="_">-d</span> example.com <span class="_">-d</span> www.example.com --authenticator standalone --tls-sni-01-port 63443 --text auth  --http-01-port 8099</div></pre></td></tr></table></figure></p>
+<p>Now, download ssl-cert-check from Prefetch.net. This is very useful script because it calculates the time difference between the current time and the certification expiration date:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo wget -O http://prefetch.net/code/ssl-cert-check /usr/<span class="built_in">local</span>/bin/ssl-cert-check</div><div class="line">sudo chmod +x /usr/<span class="built_in">local</span>/bin/ssl-cert-check</div></pre></td></tr></table></figure>
+<p>Put this script to /etc/cron.daily/updatessl and make it executable :</p>
+<script src="//gist.github.com/eniac111/c7146b3e59c7eff27fbe.js"></script>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo wget -O https://gist.githubusercontent.com/eniac111/c7146b3e59c7eff27fbe/raw/506643d797811ec99ce6e32d8f9e23ea3a9200d4/updatessl.sh /etc/cron.daily/updatessl</div><div class="line">sudo chmod +x /etc/cron.daily/updatessl</div></pre></td></tr></table></figure>
+<h3 id="The-last-thing-is-to-create-logrotate-config-for-the-update-log"><a href="#The-last-thing-is-to-create-logrotate-config-for-the-update-log" class="headerlink" title="The last thing is to create logrotate config for the update log:"></a>The last thing is to create logrotate config for the update log:</h3><p>Install logrotate it it’s not installed:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y logrotate</div></pre></td></tr></table></figure>
+<p>Put this to <em>/etc/logrotate/letsencrypt-update</em>:</p>
+<figure class="highlight stata"><figcaption><span>[/etc/logrotate/letsencrypt-update]</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/<span class="keyword">var</span>/<span class="keyword">log</span>/letsencrypt-<span class="keyword">update</span>.<span class="keyword">log</span> &#123;</div><div class="line">	<span class="built_in">monthly</span></div><div class="line">	<span class="keyword">rotate</span> 12</div><div class="line">	<span class="keyword">compress</span></div><div class="line">	delaycompress</div><div class="line">	missingok</div><div class="line">	notifempty</div><div class="line">	create 644 root root</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Correct me if there is a better way. The double loop inside HAProxy is really bizzare.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>It’s been a while since my last post here. This is my first post with the new platform - <a href="https://hexo.io">Hexo</a>. It’s faster and simpler than Octopress and it’s not Ruby but nevermind…</p>
+<p>The whole concept with the Certification Authorities is completely broken but we don’t have something better which is working. A world with fully encrypted web is a really a good idea since the whole internet traffic is monitored by governments and other private organizations. <a href="https://letsencrypt.org">Let’s encrypt</a> is an attempt for that. It’s a colaborative project between Linux foundation, EFF and some other organizations.</p>]]>
+    
+    </summary>
+    
+      <category term="letsencrypt encryption web servers tls ssl" scheme="http://petrovs.info/tags/letsencrypt-encryption-web-servers-tls-ssl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[QnD home bruschettes]]></title>
+    <link href="http://petrovs.info/2015/03/11/qnd-home-bruschettes/"/>
+    <id>http://petrovs.info/2015/03/11/qnd-home-bruschettes/</id>
+    <published>2015-03-11T17:56:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>My second culinary post. I’m going to show you how to bake bruschettes at home, the quick way.</p>
+<h2 id="What-is-needed"><a href="#What-is-needed" class="headerlink" title="What is needed:"></a>What is needed:</h2><ul>
+<li>A Gevrek or more gevreks;</li>
+<li>Butter;</li>
+<li>Salt (or Tchiyrska Merudiya, from my last post);</li>
+<li>Caraway (optional)</li>
+</ul>
+<a id="more"></a>
+<h3 id="The-Gevrek…"><a href="#The-Gevrek…" class="headerlink" title="The Gevrek…"></a>The Gevrek…</h3><p><img src="/images/cooking/bruschettes/a.jpg" alt="Gevrek"></p>
+<h3 id="Must-be-cut-into-small-pieces"><a href="#Must-be-cut-into-small-pieces" class="headerlink" title="Must be cut into small pieces:"></a>Must be cut into small pieces:</h3><p><img src="/images/cooking/bruschettes/b.jpg" alt="Gevrek in small pieces"></p>
+<h3 id="The-pan-and-the-pieces-must-be-spread-with-some-butter"><a href="#The-pan-and-the-pieces-must-be-spread-with-some-butter" class="headerlink" title="The pan and the pieces must be spread with some butter:"></a>The pan and the pieces must be spread with some butter:</h3><p><img src="/images/cooking/bruschettes/c.jpg" alt="The big, dark pan.."></p>
+<h3 id="…-and-the-pieces-must-be-salted"><a href="#…-and-the-pieces-must-be-salted" class="headerlink" title="… and the pieces must be salted."></a>… and the pieces must be salted.</h3><p>Caraway and other spices are optional. Interesting idea is an olive paste or blue cheese.</p>
+<p><img src="/images/cooking/bruschettes/d.jpg" alt="The pan, again.."></p>
+<h3 id="Put-the-pan-in-the-oven-for-10min-at-220°c"><a href="#Put-the-pan-in-the-oven-for-10min-at-220°c" class="headerlink" title="Put the pan in the oven for ~10min at 220°c:"></a>Put the pan in the oven for ~10min at 220°c:</h3><p><img src="/images/cooking/bruschettes/e.jpg" alt="The oven"></p>
+<h3 id="But-be-careful"><a href="#But-be-careful" class="headerlink" title="But be careful!"></a>But be careful!</h3><p><img src="/images/cooking/bruschettes/f.jpg" alt="fin!"></p>
+<h2 id="Fin"><a href="#Fin" class="headerlink" title="Fin!"></a>Fin!</h2>]]></content>
+    <summary type="html">
+    <![CDATA[<p>My second culinary post. I’m going to show you how to bake bruschettes at home, the quick way.</p>
+<h2 id="What-is-needed"><a href="#What-is-needed" class="headerlink" title="What is needed:"></a>What is needed:</h2><ul>
+<li>A Gevrek or more gevreks;</li>
+<li>Butter;</li>
+<li>Salt (or Tchiyrska Merudiya, from my last post);</li>
+<li>Caraway (optional)</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="geekscookin cooking gkin" scheme="http://petrovs.info/categories/geekscookin-cooking-gkin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[How to cook Patatnik?]]></title>
+    <link href="http://petrovs.info/2015/03/08/how-to-cook-patatnik/"/>
+    <id>http://petrovs.info/2015/03/08/how-to-cook-patatnik/</id>
+    <published>2015-03-08T21:01:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>This is my first non technical post here. I’m goona explain in details my way to cook Patatnik - Bulgarian dish from the Rhodopi Mountains. It’s made of shredded potatoes, eggs, onions, cheese and some local spices. I’m not sure if this is the most authentic recipe but it’s the way I like it.</p>
+<a id="more"></a>
+<h2 id="What-is-needed-for-two-servings"><a href="#What-is-needed-for-two-servings" class="headerlink" title="What is needed for two servings:"></a>What is needed for two servings:</h2><ol>
+<li>3 - 4 medium potatoes;</li>
+<li>A head of an onion;</li>
+<li>3 eggs;</li>
+<li>~100g. of white cheese (Sirene. It’s famous in the balkans. Something similar is the greek Féta but it’s too greasy. In western europe, Sirene can be found in the Polish shops (in UK) and the arabic markets);</li>
+<li>Sprig of Spearmint (in Bulgarian it’s called Dzhodzhen or Gyozum, the latin name is Mentha Spicata. This spice is very suitable for potatoes and beans.);</li>
+<li>Salt. Instead of salt I’m using “Chiirska merudiya”. It’s a type of grass which is crushed with salt and dried. I don’t know the official name of the plant. It’s known and called “Chiirska merudiya” in the region of Trakia in Bulgaria. It’s very simmilar to “Nectaroscordum siculum ssp. bulgaricum” which is used the same way, with salt. </li>
+</ol>
+<h3 id="First-peel-the-potatoes"><a href="#First-peel-the-potatoes" class="headerlink" title="First, peel the potatoes:"></a>First, peel the potatoes:</h3><p><img src="/images/cooking/patatnik/a.jpg" alt="Peeling the potatoes"></p>
+<h3 id="After-that-cut-the-onion-into-small-pieces"><a href="#After-that-cut-the-onion-into-small-pieces" class="headerlink" title="After that, cut the onion into small pieces:"></a>After that, cut the onion into small pieces:</h3><p><img src="/images/cooking/patatnik/b.jpg" alt="A head of onion"><br><img src="/images/cooking/patatnik/c.jpg" alt="Cutted onion"></p>
+<h3 id="Shred-the-potatoes-thinly"><a href="#Shred-the-potatoes-thinly" class="headerlink" title="Shred the potatoes thinly:"></a>Shred the potatoes thinly:</h3><p><img src="/images/cooking/patatnik/d.jpg" alt="Potato shredder"><br><img src="/images/cooking/patatnik/e.jpg" alt="Shredded potatoes"></p>
+<h3 id="Squeeze-the-potatoes-by-hand-to-dehidrate-them-That’s-my-way"><a href="#Squeeze-the-potatoes-by-hand-to-dehidrate-them-That’s-my-way" class="headerlink" title="Squeeze the potatoes by hand to dehidrate them (That’s my way?!):"></a>Squeeze the potatoes by hand to dehidrate them (That’s my way?!):</h3><p><img src="/images/cooking/patatnik/f.jpg" alt="Potato water"><br>… and throw the water!</p>
+<h3 id="Add-the-onion"><a href="#Add-the-onion" class="headerlink" title="Add the onion:"></a>Add the onion:</h3><p><img src="/images/cooking/patatnik/g.jpg" alt="Adding the onion"></p>
+<h3 id="Add-the-eggs-and-the-cheese"><a href="#Add-the-eggs-and-the-cheese" class="headerlink" title="Add the eggs and the cheese:"></a>Add the eggs and the cheese:</h3><p>The cheese and the eggs can be smashed and mixed previously.</p>
+<p><img src="/images/cooking/patatnik/h.jpg" alt="Mixing the cheese and the eggs with the taties"></p>
+<h3 id="Add-the-spices-and-then-mix-everthing-again"><a href="#Add-the-spices-and-then-mix-everthing-again" class="headerlink" title="Add the spices and then mix everthing again:"></a>Add the spices and then mix everthing again:</h3><p><img src="/images/cooking/patatnik/i.jpg" alt="Everything is in.."></p>
+<p>This is how a jar of home made Merudia salt looks like:<br><img src="/images/cooking/patatnik/j.jpg" alt="Merudia"></p>
+<h3 id="Grease-two-clay-plates-with-some-oil"><a href="#Grease-two-clay-plates-with-some-oil" class="headerlink" title="Grease two clay plates with some oil:"></a>Grease two clay plates with some oil:</h3><p>These are authentic bulgarian plates :)</p>
+<p><img src="/images/cooking/patatnik/k.jpg" alt="Oiling the plates.."></p>
+<h3 id="Put-the-mixture-in-the-plates-and-bake-it"><a href="#Put-the-mixture-in-the-plates-and-bake-it" class="headerlink" title="Put the mixture in the plates and bake it:"></a>Put the mixture in the plates and bake it:</h3><p>It must be baked on 220°c between 30 and 60 minutes. Depends of the humidity of the mixture.</p>
+<p><img src="/images/cooking/patatnik/l.jpg" alt="Ready for baking.."></p>
+<h3 id="…-and-voila-Serve-it-with-Ayran-and-something-spicy"><a href="#…-and-voila-Serve-it-with-Ayran-and-something-spicy" class="headerlink" title="… and voilà! Serve it with Ayran and something spicy ;)"></a>… and voilà! Serve it with <a href="http://en.wikipedia.org/wiki/Ayran" target="_blank" rel="external">Ayran</a> and something spicy ;)</h3><p><img src="/images/cooking/patatnik/tadaa.jpg" alt="Tadaa!"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>This is my first non technical post here. I’m goona explain in details my way to cook Patatnik - Bulgarian dish from the Rhodopi Mountains. It’s made of shredded potatoes, eggs, onions, cheese and some local spices. I’m not sure if this is the most authentic recipe but it’s the way I like it.</p>]]>
+    
+    </summary>
+    
+      <category term="geekscookin cooking gkin" scheme="http://petrovs.info/categories/geekscookin-cooking-gkin/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Quick way to setup VirtualBox VM in multi user environment]]></title>
+    <link href="http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/"/>
+    <id>http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/</id>
+    <published>2015-01-14T10:07:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstations may work with LDAP and NFS/Cifs. The standard installation of the VM would be extremely space consuming and it would cost a lot of the personal life of the administrator.<br>I made an easy hack to solve this ( this is real setup in university labs).</p>
+<a id="more"></a>
+<p>Let’s install a standard local Windows XP virtual machine and permanently mount the local directories <em>/home/trendafil</em> and <em>/media</em> .<br>In this example, the home directory of the user will be mounted on <em>X:\</em> on Windows and media will be <em>Z:\</em> .</p>
+<p>The important directories are out of the VM. So, the virtual machine will be runned from snapshot on every boot.<br>The next useful step is to move the default user profile outside the VM. I don’t need something different than <em>My Documents</em> but in other cases, everything from the profile can be exported to <em>/home</em>, outside the VM. So, open <em>“regedit”</em> in Windows and go to the</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HKEY_CURRENT_USER<span class="symbol">\S</span>oftware<span class="symbol">\M</span>icrosoft<span class="symbol">\W</span>indows<span class="symbol">\C</span>urrentVersion<span class="symbol">\E</span>xplorer<span class="symbol">\S</span>hell User Folders</div></pre></td></tr></table></figure>
+<p>and change the key <em>“My Documents”</em> to <em>X:\</em></p>
+<p><img src="/images/winxpsnap/regedit.png" alt="Regedit"></p>
+<p>Turn off the VM and create an empty snapshot</p>
+<p><img src="/images/winxpsnap/snapshot.png" alt="Creating the snapshot"></p>
+<p>Next, move the VM from <em>~/VirtualBox VMs</em> to <em>~/.config/VirtualBox</em> if it’s the official VirtualBox edition or <em>~/.VirtualBox</em> for the open source edition from the Ubuntu repositories. </p>
+<p>Open the file <em>~/.config/VirtualBox/VirtualBox.xml</em> and clean it from the needless stuff: </p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;ExtraDataItem name=<span class="string">"GUI/RecentFolderHD"</span>......;</div><div class="line">&lt;ExtraDataItem name=<span class="string">"GUI/RecentListHD"</span> ....... and etc..</div></pre></td></tr></table></figure>
+<p>Change the location of the VM and replace your username with “<em>CURRENTUSR</em>“ everywhere inside the file, like this:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="tag">&lt;<span class="name">MachineRegistry</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">MachineEntry</span> <span class="attr">uuid</span>=<span class="string">"&#123;64245cfc-36c6-4112-9869-d5b9da817fca&#125;"</span> <span class="attr">src</span>=<span class="string">"/home/_CURRENTUSR_/.VirtualBox/WinXP/WinXP.vbox"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">MachineRegistry</span>&gt;</span></div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">SystemProperties</span> <span class="attr">defaultMachineFolder</span>=<span class="string">"/home/_CURRENTUSR_/VirtualBox VMs"</span> <span class="attr">defaultHardDiskFormat</span>=<span class="string">"VDI"</span> <span class="attr">VRDEAuthLibrary</span>=<span class="string">"VBoxAuth"</span> <span class="attr">webServiceAuthLibrary</span>=<span class="string">"VBoxAuth"</span> <span class="attr">LogHistoryCount</span>=<span class="string">"3"</span> <span class="attr">exclusiveHwVirt</span>=<span class="string">"true"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>Also, replace the username the same way in <em>“~/.VirtualBox/WinXP/WinXP.xml”</em></p>
+<p>Change the location of the harddisk image to <em>/var/vbox/</em> like this: </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">HardDisk</span> <span class="attr">uuid</span>=<span class="string">"&#123;c052dc96-569b-4873-a799-2a75497404db&#125;"</span> <span class="attr">location</span>=<span class="string">"/var/vbox/winxp.vmdk"</span> <span class="attr">format</span>=<span class="string">"VMDK"</span> <span class="attr">type</span>=<span class="string">"Normal"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Create the directory <em>/var/vbox/</em> and then move the harddisk image from <em>~/.VirtualBox/WinXp/winxp.vmdk</em> to <em>/var/vbox</em> .</p>
+<p>Then, move the whole <em>~/.VirtualBox</em> or <em>~/.config/VirtualBox</em> to <em>/var/vbox</em></p>
+<p>Install Zenity if it’s not installed:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install zenity</div></pre></td></tr></table></figure>
+<p>Download this file and put it on /usr/local/bin/startwin: </p>
+<script src="https://gist.github.com/eniac111/00fcc0afd16e57172fce.js"></script>
+
+<p>and make it executable: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># chmod +x /usr/local/bin/startwin</span></div></pre></td></tr></table></figure>
+<p>It should work now. Every user of the system can start the VM from the script. </p>
+<p>Additionaly, you can create a desktop enry.<br>First, find an ugly Window$ logo with an open license and put it on <em>/usr/share/icons/win.png</em>. Then, create the file <em>/usr/share/applications/startwin.desktop</em> with this content: </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="section"></span></div><div class="line">[Desktop Entry]</div><div class="line"><span class="attr">Encoding</span>=UTF-<span class="number">8</span></div><div class="line"><span class="attr">Version</span>=<span class="number">1.0</span></div><div class="line"><span class="attr">Name</span>=Windows XP</div><div class="line"><span class="attr">GenericName</span>=Windows XP</div><div class="line"><span class="attr">Type</span>=Application</div><div class="line"><span class="attr">Exec</span>=/usr/lcal/bin/startwin</div><div class="line"><span class="attr">TryExec</span>=/usr/local/bin/startwin</div><div class="line"><span class="attr">Icon</span>=/usr/share/icons/win.png</div><div class="line"><span class="attr">Categories</span>=Emulator;System;Application;</div><div class="line"><span class="attr">Comment</span>=WindowsXP VirtualBox WM</div><div class="line"></div></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstations may work with LDAP and NFS/Cifs. The standard installation of the VM would be extremely space consuming and it would cost a lot of the personal life of the administrator.<br>I made an easy hack to solve this ( this is real setup in university labs).</p>]]>
+    
+    </summary>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/IT/"/>
+    
+      <category term="Virtualization" scheme="http://petrovs.info/categories/IT/Virtualization/"/>
+    
+      <category term="Ubuntu" scheme="http://petrovs.info/categories/IT/Virtualization/Ubuntu/"/>
+    
+      <category term="Tools" scheme="http://petrovs.info/categories/IT/Virtualization/Ubuntu/Tools/"/>
+    
+      <category term="VirtualBox" scheme="http://petrovs.info/categories/IT/Virtualization/Ubuntu/Tools/VirtualBox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Quick way to setup VirtualBox VM in multi user environment]]></title>
+    <link href="http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/"/>
+    <id>http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/</id>
+    <published>2015-01-14T10:07:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstations may work with LDAP and NFS/Cifs. The standard installation of the VM would be extremely space consuming and it would cost a lot of the personal life of the administrator.<br>I made an easy hack to solve this ( this is real setup in university labs).</p>
+<a id="more"></a>
+<p>Let’s install a standard local Windows XP virtual machine and permanently mount the local directories <em>/home/trendafil</em> and <em>/media</em> .<br>In this example, the home directory of the user will be mounted on <em>X:\</em> on Windows and media will be <em>Z:\</em> .</p>
+<p>The important directories are out of the VM. So, the virtual machine will be runned from snapshot on every boot.<br>The next useful step is to move the default user profile outside the VM. I don’t need something different than <em>My Documents</em> but in other cases, everything from the profile can be exported to <em>/home</em>, outside the VM. So, open <em>“regedit”</em> in Windows and go to the</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HKEY_CURRENT_USER<span class="symbol">\S</span>oftware<span class="symbol">\M</span>icrosoft<span class="symbol">\W</span>indows<span class="symbol">\C</span>urrentVersion<span class="symbol">\E</span>xplorer<span class="symbol">\S</span>hell User Folders</div></pre></td></tr></table></figure>
+<p>and change the key <em>“My Documents”</em> to <em>X:\</em></p>
+<p><img src="/images/winxpsnap/regedit.png" alt="Regedit"></p>
+<p>Turn off the VM and create an empty snapshot</p>
+<p><img src="/images/winxpsnap/snapshot.png" alt="Creating the snapshot"></p>
+<p>Next, move the VM from <em>~/VirtualBox VMs</em> to <em>~/.config/VirtualBox</em> if it’s the official VirtualBox edition or <em>~/.VirtualBox</em> for the open source edition from the Ubuntu repositories. </p>
+<p>Open the file <em>~/.config/VirtualBox/VirtualBox.xml</em> and clean it from the needless stuff: </p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;ExtraDataItem name=<span class="string">"GUI/RecentFolderHD"</span>......;</div><div class="line">&lt;ExtraDataItem name=<span class="string">"GUI/RecentListHD"</span> ....... and etc..</div></pre></td></tr></table></figure>
+<p>Change the location of the VM and replace your username with “<em>CURRENTUSR</em>“ everywhere inside the file, like this:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="tag">&lt;<span class="name">MachineRegistry</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">MachineEntry</span> <span class="attr">uuid</span>=<span class="string">"&#123;64245cfc-36c6-4112-9869-d5b9da817fca&#125;"</span> <span class="attr">src</span>=<span class="string">"/home/_CURRENTUSR_/.VirtualBox/WinXP/WinXP.vbox"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">MachineRegistry</span>&gt;</span></div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">SystemProperties</span> <span class="attr">defaultMachineFolder</span>=<span class="string">"/home/_CURRENTUSR_/VirtualBox VMs"</span> <span class="attr">defaultHardDiskFormat</span>=<span class="string">"VDI"</span> <span class="attr">VRDEAuthLibrary</span>=<span class="string">"VBoxAuth"</span> <span class="attr">webServiceAuthLibrary</span>=<span class="string">"VBoxAuth"</span> <span class="attr">LogHistoryCount</span>=<span class="string">"3"</span> <span class="attr">exclusiveHwVirt</span>=<span class="string">"true"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>Also, replace the username the same way in <em>“~/.VirtualBox/WinXP/WinXP.xml”</em></p>
+<p>Change the location of the harddisk image to <em>/var/vbox/</em> like this: </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">HardDisk</span> <span class="attr">uuid</span>=<span class="string">"&#123;c052dc96-569b-4873-a799-2a75497404db&#125;"</span> <span class="attr">location</span>=<span class="string">"/var/vbox/winxp.vmdk"</span> <span class="attr">format</span>=<span class="string">"VMDK"</span> <span class="attr">type</span>=<span class="string">"Normal"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Create the directory <em>/var/vbox/</em> and then move the harddisk image from <em>~/.VirtualBox/WinXp/winxp.vmdk</em> to <em>/var/vbox</em> .</p>
+<p>Then, move the whole <em>~/.VirtualBox</em> or <em>~/.config/VirtualBox</em> to <em>/var/vbox</em></p>
+<p>Install Zenity if it’s not installed:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install zenity</div></pre></td></tr></table></figure>
+<p>Download this file and put it on /usr/local/bin/startwin: </p>
+<script src="https://gist.github.com/eniac111/00fcc0afd16e57172fce.js"></script>
+
+<p>and make it executable: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># chmod +x /usr/local/bin/startwin</span></div></pre></td></tr></table></figure>
+<p>It should work now. Every user of the system can start the VM from the script. </p>
+<p>Additionaly, you can create a desktop enry.<br>First, find an ugly Window$ logo with an open license and put it on <em>/usr/share/icons/win.png</em>. Then, create the file <em>/usr/share/applications/startwin.desktop</em> with this content: </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="section"></span></div><div class="line">[Desktop Entry]</div><div class="line"><span class="attr">Encoding</span>=UTF-<span class="number">8</span></div><div class="line"><span class="attr">Version</span>=<span class="number">1.0</span></div><div class="line"><span class="attr">Name</span>=Windows XP</div><div class="line"><span class="attr">GenericName</span>=Windows XP</div><div class="line"><span class="attr">Type</span>=Application</div><div class="line"><span class="attr">Exec</span>=/usr/lcal/bin/startwin</div><div class="line"><span class="attr">TryExec</span>=/usr/local/bin/startwin</div><div class="line"><span class="attr">Icon</span>=/usr/share/icons/win.png</div><div class="line"><span class="attr">Categories</span>=Emulator;System;Application;</div><div class="line"><span class="attr">Comment</span>=WindowsXP VirtualBox WM</div><div class="line"></div></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstations may work with LDAP and NFS/Cifs. The standard installation of the VM would be extremely space consuming and it would cost a lot of the personal life of the administrator.<br>I made an easy hack to solve this ( this is real setup in university labs).</p>]]>
+    
+    </summary>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/IT/"/>
+    
+      <category term="Virtualization" scheme="http://petrovs.info/categories/IT/Virtualization/"/>
+    
+      <category term="Ubuntu" scheme="http://petrovs.info/categories/IT/Virtualization/Ubuntu/"/>
+    
+      <category term="Tools" scheme="http://petrovs.info/categories/IT/Virtualization/Ubuntu/Tools/"/>
+    
+      <category term="VirtualBox" scheme="http://petrovs.info/categories/IT/Virtualization/Ubuntu/Tools/VirtualBox/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Quick utility for enterprise security]]></title>
+    <link href="http://petrovs.info/2014/12/21/quick-utility-for-enterprise-security/"/>
+    <id>http://petrovs.info/2014/12/21/quick-utility-for-enterprise-security/</id>
+    <published>2014-12-21T14:35:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<img src="http://petrovs.info/images/security_usability.png" class="center" title="Schematic of the setup">
+<p>Security and usability are almost never mutually inclusive concepts. Expecially in the cloud apps. They are really useful but the security is controversial. Highest security means no internet and even computers..</p>
+<a id="more"></a>
+<p>In our company, we use OwnCloud. It’s an open source application for cloud file synchronization, like DropBox and Google Drive.<br>OwnCloud can be used with private SSL keys but it’s still not secure because it’s written on PHP. I make updates regularly but a security flaw may be undiscovered for weeks or even years (<a href="http://heartbleed.com/" target="_blank" rel="external">Heartbleed</a> and <a href="http://en.wikipedia.org/wiki/Shellshock_%28software_bug%29" target="_blank" rel="external">Shellshock</a> for example).<br>VPN is not a solution because it separates from the point in the middle when OwnCloud is used on a smartphone or tablet.<br>I wrote a small application for usage inside our company. It generates an unique string from the filename and the metadata of the office documents.</p>
+<img src="http://petrovs.info/images/nebopassgen.png" class="center" title="Schematic of the setup">
+<p>The string can be set for a password of the document. This is not a strong security solution, but a small accurance. It’s a matter of CPU time for the password to be cracked. But it’s even closer to the point in the middle because nobody have to remember the passwords. Maybe it would be good if it uses Kde’s Wallet, Gnome Keyring or something other in Windows, but it’s still under consideration.</p>
+<p>It’s sad but I cannot make it Open Source :D</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<img src="http://petrovs.info/images/security_usability.png" class="center" title="Schematic of the setup">
+<p>Security and usability are almost never mutually inclusive concepts. Expecially in the cloud apps. They are really useful but the security is controversial. Highest security means no internet and even computers..</p>]]>
+    
+    </summary>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/IT/"/>
+    
+      <category term="Security" scheme="http://petrovs.info/categories/IT/Security/"/>
+    
+      <category term="Cloud" scheme="http://petrovs.info/categories/IT/Security/Cloud/"/>
+    
+      <category term="Utilites" scheme="http://petrovs.info/categories/IT/Security/Cloud/Utilites/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Gmail is integrated with GitHub!]]></title>
+    <link href="http://petrovs.info/2014/12/08/gmail-is-integrated-with-github/"/>
+    <id>http://petrovs.info/2014/12/08/gmail-is-integrated-with-github/</id>
+    <published>2014-12-08T21:59:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>Today I found that Gmail parses the messages from GitHub and integrates small buttons in it’s UI :)</p>
+<img src="http://petrovs.info/images/gmail-github.png" class="center" title="Schematic of the setup">]]></content>
+    <summary type="html">
+    <![CDATA[<p>Today I found that Gmail parses the messages from GitHub and integrates small buttons in it’s UI :)</p>
+<img src="http://petrovs.info/ima]]>
+    </summary>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/IT/"/>
+    
+      <category term="Stuff" scheme="http://petrovs.info/categories/IT/Stuff/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Manual HA Cluster with Linux Containers, DRBD and Btrfs]]></title>
+    <link href="http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/"/>
+    <id>http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/</id>
+    <published>2014-11-28T17:20:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>In this post I’m gonna explain you how to deploy really fast and cheap cluster of Linux Containers. I use the same setup in a production enviroment for a big accounting software (10GB++ of MySQL). </p>
+<img src="http://petrovs.info/images/lxccluster/diagram1.jpeg" class="center" title="Schematic of the setup">
+<p>Why <a href="https://linuxcontainers.org/" target="_blank" rel="external">LXC</a>? Because it is Über-cool! Compared to the Hardware Virtualization, the runtime performance is near the bare metal speeds. Operations like starting/stopping of the system or clonning and snapshots are really fast. There’s no virtual BIOS, boot loader and kernel. A given number of containers can share the same system resources as they are installed on the same bare metal system and are still isolated. It’s really lightweight and flexible. You can containerize everything - a whole system or a single application. <a href="https://www.stgraber.org/2013/12/27/lxc-1-0-container-storage/" target="_blank" rel="external">Stéphane Graber</a> has a really good blog post series about LXC.</p>
+<p><a href="http://www.drbd.org/" target="_blank" rel="external">DRBD</a> will provide the block device replication between the servers. Let’s think of it as a RAID1 array between the two machines. It can work as master-master or master-slave. The master-master setup is more risky and it works only with shared cluster file systems (GFS, OCFS2 or GlusterFS). I don’t have the balls to use it master-master on two nodes for VM’s and containers, so in this setup I’ll use master-slave. The difference is that when an array is promoted as slave on a given machine, it cannot be accessed.</p>
+<p><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page" target="_blank" rel="external">Btrfs</a> is the new hipster in town :) It’s a new “copy on write” file system and logical volume manager for the Linux kernel. It has many similarities with the ZFS, but is part of the kernel. Snapshotting and cloning of the containers are easier with Btrfs. It can make snapshots and subvolumes of a given directory and mount it as another block device. Note that it’s already stable but still has problems. Stable filesystem for production environment must be 7+ years old! I bet on the backups :)</p>
+<p>So, let’s suppose that we have two identical machines with this sample configuration:</p>
+<ul>
+<li>Intel Xeon E5;</li>
+<li>16GB of RAM;</li>
+<li>500GB RAID1 array -&gt; /dev/sda;</li>
+<li>2x 1TB RAID10 arrays -&gt; /dev/sdb and /dev/sdc;</li>
+<li>Standart gigabit interface/s -&gt; eth0;</li>
+<li>10GB Ethernet interface, linked between the machines -&gt; eth1;</li>
+</ul>
+<a id="more"></a>
+<p>First, install standart Ubuntu LTS on the RAID1 arrays and don’t touch the RAID10.</p>
+<p>#The Network</p>
+<p>The containers will use veth network, so we need to create a bridge:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install bridge-utils</div></pre></td></tr></table></figure>
+<p>Our internet network will be 10.1.0.0/24 and our peer network - 10.0.254.0/30.<br>So, <em>/etc/network/interfaces</em> of node1 will be:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet manual</div><div class="line"></div><div class="line">auto br0</div><div class="line">iface br0 inet static</div><div class="line">	address 10.1.0.5</div><div class="line">	netmask 255.255.255.0</div><div class="line">	gateway 10.1.0.1 <span class="comment">#ok, let's put a gateway:)</span></div><div class="line">	bridge_ports eth0</div><div class="line">	bridge_fd 0</div><div class="line">	bridge_stp off</div><div class="line">	bridge_maxwait 0</div><div class="line"></div><div class="line">auto eth1</div><div class="line">iface eth1 inet static</div><div class="line">	address 10.0.254.1</div><div class="line">	netmask 255.255.255.252</div></pre></td></tr></table></figure>
+<p>And for node2:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">	address 10.1.0.6</div><div class="line">	netmask 255.255.255.0</div><div class="line">	gateway 10.1.0.1</div><div class="line"></div><div class="line">auto eth1</div><div class="line">iface eth1 inet static</div><div class="line">	address 10.0.254.2</div><div class="line">	netmask 255.255.255.252</div></pre></td></tr></table></figure>
+<p>… and the hostnames in /etc/hosts. DRBD works with hostnames. On the both machines:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">127.0.0.1	localhost</div><div class="line">10.0.254.1	node1</div><div class="line">10.0.254.2	node2</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>restart the network</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service networking restart</div></pre></td></tr></table></figure>
+<p>#DRBD</p>
+<p>Be sure to check the official documentation. The setup of DRBD is really complex and personal, depending on the hardware, the network and the required results.</p>
+<figure class="highlight bash"><figcaption><span>Installing drbd on the both machines</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install drbd8-utils</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Load the kernel module</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install drbd8-utils</div></pre></td></tr></table></figure>
+<p>The time must be in sync for the DRBD. So, install NTP clien:</p>
+<figure class="highlight bash"><figcaption><span>on the both machines</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ntp ntpdate</div></pre></td></tr></table></figure>
+<p>On this tutorial I will use the whole RAID10 arrays. It would be better if we completely erase the partition tables (if any) and start from scratch with a new partition table and just one, empty partition.<br>Erase the partition tables on the both of the nodes. I expect the drive numbers to be identical because the hardware is the same:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb bs=1M count=10</div><div class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdc bs=1M count=10</div></pre></td></tr></table></figure>
+<p>DRBD can also be setup in LVM logical volume.</p>
+<p>Let’s take a look at the partition layout of the drives. For the example in the tutorial, I use a qcow2 image, mounted on my laptop and some information like the disk identifier and model will not appear. Also, <strong>sda</strong> is not sized for server usage.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">sudo fdisk <span class="_">-l</span></div><div class="line"></div><div class="line">Disk /dev/sda: 750.2 GB, 750156374016 bytes</div><div class="line">255 heads, 63 sectors/track, 91201 cylinders, total 1465149168 sectors</div><div class="line">Units = sectors of 1 * 512 = 512 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 4096 bytes</div><div class="line">I/O size (minimum/optimal): 4096 bytes / 4096 bytes</div><div class="line">Disk identifier: 0x1f956bec</div><div class="line"></div><div class="line">   Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sda1   *        2048      409599      203776    7  HPFS/NTFS/exFAT</div><div class="line">/dev/sda2          409600   646677178   323133789+   7  HPFS/NTFS/exFAT</div><div class="line">/dev/sda3       646678526  1464936447   409128961    5  Extended</div><div class="line">Partition 3 does not start on physical sector boundary.</div><div class="line">/dev/sda4      1464936448  1465147119      105336    c  W95 FAT32 (LBA)</div><div class="line">/dev/sda5       646678528   689645567    21483520   83  Linux</div><div class="line">/dev/sda6       689647616   693645311     1998848   82  Linux swap / Solaris</div><div class="line">/dev/sda7       693647360  1464936447   385644544   83  Linux</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sdb: 1099.5 GB, 1099511627776 bytes</div><div class="line">255 heads, 63 sectors/track, 133674 cylinders, total 2147483648 sectors</div><div class="line">Units = sectors of 1 * 512 = 512 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line">Disk /dev/sdb doesn\<span class="string">'t contain a valid partition table</span></div><div class="line"></div><div class="line">Disk /dev/sdc: 1099.5 GB, 1099511627776 bytes</div><div class="line">255 heads, 63 sectors/track, 133674 cylinders, total 2147483648 sectors</div><div class="line">Units = sectors of 1 * 512 = 512 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line">Disk /dev/sdc doesn\'t contain a valid partition table</div><div class="line"></div></pre></td></tr></table></figure>
+<p>To partition the drives, I will use parted. The <strong>-a optimal</strong> flag will ensure that the partitions are properly aligned.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo parted <span class="_">-a</span> optimal /dev/sdb</div><div class="line"></div><div class="line">GNU Parted 2.3</div><div class="line">Using /dev/sdb</div><div class="line">Welcome to GNU Parted! Type <span class="string">'help'</span> to view a list of commands.</div><div class="line">(parted) </div></pre></td></tr></table></figure>
+<p>…and create a new partition table:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parted) mklabel msdos</div></pre></td></tr></table></figure>
+<p>View the available disk space</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(parted) <span class="built_in">print</span> free</div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdb: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start   End     Size    Type  File system  Flags</div><div class="line">        32,3kB  1100GB  1100GB        Free Space</div></pre></td></tr></table></figure>
+<p>And an overview of the partitions on all drives:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">(parted) <span class="built_in">print</span> all</div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdb: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start  End  Size  Type  File system  Flags</div><div class="line"></div><div class="line"></div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdc: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start  End  Size  Type  File system  Flags</div><div class="line"></div><div class="line"></div><div class="line">Model: ATA Hitachi HTS54757 (scsi)</div><div class="line">Disk /dev/sda: 750GB</div><div class="line">Sector size (logical/physical): 512B/4096B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start   End    Size    Type      File system     Flags</div><div class="line"> 1      1049kB  210MB  209MB   primary   ntfs            boot</div><div class="line"> 2      210MB   331GB  331GB   primary   ntfs</div><div class="line"> 3      331GB   750GB  419GB   extended</div><div class="line"> 5      331GB   353GB  22,0GB  logical   ext4</div><div class="line"> 6      353GB   355GB  2047MB  logical   linux-swap(v1)</div><div class="line"> 7      355GB   750GB  395GB   logical   ext4</div><div class="line"> 4      750GB   750GB  108MB   primary   fat32           lba</div><div class="line"></div><div class="line">(parted)</div></pre></td></tr></table></figure>
+<p>Create a primary partitions on /dev/sdb and /dev/sdc using all the available disk space. Start at 1049kB, the same block that is used on /dev/sda.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parted) mkpart primary 1049kB 1100GB</div></pre></td></tr></table></figure>
+<p>And see the new partition: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(parted) <span class="built_in">print</span> free                                                        </div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdb: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start   End     Size    Type     File system  Flags</div><div class="line">        32,3kB  1049kB  1016kB           Free Space</div><div class="line"> 1      1049kB  1100GB  1100GB  primary</div></pre></td></tr></table></figure>
+<p>Check if the partition is properly aligned:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parted) align-check opt 1</div></pre></td></tr></table></figure>
+<p>Backup the default DRBD configuration:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/drbd.conf /root/drbd.conf.back</div><div class="line">sudo cp /etc/drbd.d/global_common.conf /root/glonal_common.conf.back</div></pre></td></tr></table></figure>
+<p>On Ubuntu 14.04, the section <em>“common”</em> is added to <em>/etc/drbd.d/global_common.conf</em>. Add syncer rate:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">global &#123;</div><div class="line">	usage-count no;</div><div class="line">	<span class="comment"># minor-count dialog-refresh disable-ip-verification</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">common &#123;</div><div class="line">	handlers &#123;</div><div class="line">		<span class="comment"># These are EXAMPLE handlers only.</span></div><div class="line">		<span class="comment"># They may have severe implications,</span></div><div class="line">		<span class="comment"># like hard resetting the node under certain circumstances.</span></div><div class="line">		<span class="comment"># Be careful when chosing your poison.</span></div><div class="line"></div><div class="line">		<span class="comment"># pri-on-incon-degr "/usr/lib/drbd/notify-pri-on-incon-degr.sh; /usr/lib/drbd/notify-emergency-reboot.sh; echo b &gt; /proc/sysrq-trigger ; reboot -f";</span></div><div class="line">		<span class="comment"># pri-lost-after-sb "/usr/lib/drbd/notify-pri-lost-after-sb.sh; /usr/lib/drbd/notify-emergency-reboot.sh; echo b &gt; /proc/sysrq-trigger ; reboot -f";</span></div><div class="line">		<span class="comment"># local-io-error "/usr/lib/drbd/notify-io-error.sh; /usr/lib/drbd/notify-emergency-shutdown.sh; echo o &gt; /proc/sysrq-trigger ; halt -f";</span></div><div class="line">		<span class="comment"># fence-peer "/usr/lib/drbd/crm-fence-peer.sh";</span></div><div class="line">		<span class="comment"># split-brain "/usr/lib/drbd/notify-split-brain.sh root";</span></div><div class="line">		<span class="comment"># out-of-sync "/usr/lib/drbd/notify-out-of-sync.sh root";</span></div><div class="line">		<span class="comment"># before-resync-target "/usr/lib/drbd/snapshot-resync-target-lvm.sh -p 15 -- -c 16k";</span></div><div class="line">		<span class="comment"># after-resync-target /usr/lib/drbd/unsnapshot-resync-target-lvm.sh;</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	startup &#123;</div><div class="line">		<span class="comment"># wfc-timeout degr-wfc-timeout outdated-wfc-timeout wait-after-sb</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	options &#123;</div><div class="line">		<span class="comment"># cpu-mask on-no-data-accessible</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	disk &#123;</div><div class="line">		<span class="comment"># size max-bio-bvecs on-io-error fencing disk-barrier disk-flushes</span></div><div class="line">		<span class="comment"># disk-drain md-flushes resync-rate resync-after al-extents</span></div><div class="line">                <span class="comment"># c-plan-ahead c-delay-target c-fill-target c-max-rate</span></div><div class="line">                <span class="comment"># c-min-rate disk-timeout</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	net &#123;</div><div class="line">		<span class="comment"># protocol timeout max-epoch-size max-buffers unplug-watermark</span></div><div class="line">		<span class="comment"># connect-int ping-int sndbuf-size rcvbuf-size ko-count</span></div><div class="line">		<span class="comment"># allow-two-primaries cram-hmac-alg shared-secret after-sb-0pri</span></div><div class="line">		<span class="comment"># after-sb-1pri after-sb-2pri always-asbp rr-conflict</span></div><div class="line">		<span class="comment"># ping-timeout data-integrity-alg tcp-cork on-congestion</span></div><div class="line">		<span class="comment"># congestion-fill congestion-extents csums-alg verify-alg</span></div><div class="line">		<span class="comment"># use-rle</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">        syncer &#123;</div><div class="line">                rate 200M;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The <em>“syncer rate”</em> option is dependable on the hardware and the network. It’s necessary to look the <a href="http://www.drbd.org/users-guide-8.3/s-configure-syncer-rate.html" target="_blank" rel="external">official documentation</a>.</p>
+<p>And the most important - <em>drbd.conf</em>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># You can find an example in  /usr/share/doc/drbd.../drbd.conf.example</span></div><div class="line"></div><div class="line">include <span class="string">"drbd.d/global_common.conf"</span>;</div><div class="line">include <span class="string">"drbd.d/*.res"</span>;</div><div class="line"></div><div class="line">resource r0 &#123;</div><div class="line">        protocol C;</div><div class="line">        startup &#123;</div><div class="line">                wfc-timeout 15;</div><div class="line">                degr-wfc-timeout 60;</div><div class="line">                become-primary-on node1;</div><div class="line">        &#125;</div><div class="line">        net &#123;</div><div class="line">                cram-hmac-alg sha1;</div><div class="line">                shared-secret <span class="string">"super_secret_random_code"</span>;</div><div class="line">        &#125;</div><div class="line">        on node1 &#123;</div><div class="line">                device /dev/drbd0;</div><div class="line">                disk /dev/sdb1;</div><div class="line">                address 10.0.254.1:7788;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">        on node2 &#123;</div><div class="line">                device /dev/drbd0;</div><div class="line">                disk /dev/sdb1;</div><div class="line">                address 10.0.254.2:7788;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">resource r1 &#123;</div><div class="line">        protocol C;</div><div class="line">        startup &#123;</div><div class="line">                wfc-timeout 15;</div><div class="line">                degr-wfc-timeout 60;</div><div class="line">                become-primary-on node1;</div><div class="line">        &#125;</div><div class="line">        net &#123;</div><div class="line">                cram-hmac-alg sha1;</div><div class="line">                shared-secret <span class="string">"another_super_secret_code"</span>;</div><div class="line">        &#125;</div><div class="line">        on node1 &#123;</div><div class="line">                device /dev/drbd1;</div><div class="line">                disk /dev/sdc1;</div><div class="line">                address 10.0.254.1:7789;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">        on node2 &#123;</div><div class="line">                device /dev/drbd2;</div><div class="line">                disk /dev/sdc1;</div><div class="line">                address 10.0.254.2:7789;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>Initialize the metadata storage:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo drbdadm create-md r0</div><div class="line">sudo drbdadm create-md r1</div></pre></td></tr></table></figure>
+<p>Start DRBD:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/drbd start</div></pre></td></tr></table></figure>
+<p>To start the sync process, make the first server the primary node. Exceute this on the first server only:</p>
+<figure class="highlight bash"><figcaption><span>Only on node1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo drbdadm -- --overwrite-data-of-peer primary all</div></pre></td></tr></table></figure>
+<p>Simmilar to the Linux software raid, you can monitor the process in <em>“/proc/drbd”</em>.</p>
+<p>After the sync is finnished, promote r1 (/dev/drbd1) to the second node:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drbdadm secondary r1</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drbdadm primary r1</div></pre></td></tr></table></figure>
+<p>The DRBD is done, let’s setup the Btrfs.</p>
+<p>#Btrfs</p>
+<p>First, create directories for the mount points:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /srv/&#123;store1,store2&#125;</div></pre></td></tr></table></figure>
+<p>Install Btrfs</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install btrfs-tools</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkfs.btrfs /dev/drbd0</div><div class="line">mount /dev/drbd0 /srv/store1</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkfs.btrfs /dev/drbd1</div><div class="line">mount /dev/drbd1 /dev/store2</div></pre></td></tr></table></figure>
+<p>Let’s see the available space:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">du -h /srv/store1</div><div class="line">Filesystem   Size Used Avail Use% Mounted on</div><div class="line">/dev/drbd0      1,0T  384K  1023G   1% /srv/store1</div></pre></td></tr></table></figure>
+<p>It would be identical on node2.</p>
+<p>Ok, it’s time for the Lxc.</p>
+<p>#LXC</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install lxc</div></pre></td></tr></table></figure>
+<p>Create directories for the containers:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /srv/store1/containers</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /srv/store2/containers</div></pre></td></tr></table></figure>
+<p>Change the default path in <em>/etc/lxc.conf</em>. The file may doesn’t exist:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lxc.lxcpath = /srv/store1/containers</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lxc.lxcpath = /srv/store2/containers</div></pre></td></tr></table></figure>
+<p>Change the default veth network to br0 in <em>/etc/lxc/default.conf</em>:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">lxc.betwork.type = veth</div><div class="line">lxc.network.link = br0</div><div class="line">lxc.network.flags = up</div><div class="line">lxc.network.hwaddr = 00:16:3e:xx:xx:xx</div></pre></td></tr></table></figure>
+<p>#Tests</p>
+<p>The system should be ready for production. Let’s create the first template. In Node1, for example:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lxc-create -t ubuntu -n mysql -B btrfs</div></pre></td></tr></table></figure>
+<p>Without <em>“-b btrfs”</em>, the container’s backing store will be treated as a filesystem directory and the snapshots and clones will be created with simple file copy. </p>
+<p>Copy with <em>scp</em> the files <em>/srv/store1/containers/mysql/config</em> and <em>/srv/store1/containers/mysql/fstab</em> to the according directory in node2 - <em>/srv/store2/containers/mysql/ . This is necessary for the failover setup. If, for example, node1 fails, the container </em>“mysql”<em> will be easily run from node2 if the </em>/dev/drbd0* is promoted as a primary there:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">drbdadm primary r1</div><div class="line">mount /dev/drbd0 /srv/store1</div><div class="line">lxc-start -n mysql <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>##Snapshot can be created with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lxc-snapshot -n mysql</div><div class="line">lxc-snapshot -n mysql -L <span class="comment">#will list the snapshots</span></div><div class="line">lxc-snapshot -n mysql <span class="_">-d</span> snap0 <span class="comment"># will delete snap0</span></div></pre></td></tr></table></figure>
+<p>There is a lot of documentation available about the LXC commands and configuration options. I’ll post a small howto anyway. I’m still writing backup scripts with the LXC api. If they are done, I’ll post documentation about the backup.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>In this post I’m gonna explain you how to deploy really fast and cheap cluster of Linux Containers. I use the same setup in a production enviroment for a big accounting software (10GB++ of MySQL). </p>
+<img src="http://petrovs.info/images/lxccluster/diagram1.jpeg" class="center" title="Schematic of the setup">
+<p>Why <a href="https://linuxcontainers.org/">LXC</a>? Because it is Über-cool! Compared to the Hardware Virtualization, the runtime performance is near the bare metal speeds. Operations like starting/stopping of the system or clonning and snapshots are really fast. There’s no virtual BIOS, boot loader and kernel. A given number of containers can share the same system resources as they are installed on the same bare metal system and are still isolated. It’s really lightweight and flexible. You can containerize everything - a whole system or a single application. <a href="https://www.stgraber.org/2013/12/27/lxc-1-0-container-storage/">Stéphane Graber</a> has a really good blog post series about LXC.</p>
+<p><a href="http://www.drbd.org/">DRBD</a> will provide the block device replication between the servers. Let’s think of it as a RAID1 array between the two machines. It can work as master-master or master-slave. The master-master setup is more risky and it works only with shared cluster file systems (GFS, OCFS2 or GlusterFS). I don’t have the balls to use it master-master on two nodes for VM’s and containers, so in this setup I’ll use master-slave. The difference is that when an array is promoted as slave on a given machine, it cannot be accessed.</p>
+<p><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">Btrfs</a> is the new hipster in town :) It’s a new “copy on write” file system and logical volume manager for the Linux kernel. It has many similarities with the ZFS, but is part of the kernel. Snapshotting and cloning of the containers are easier with Btrfs. It can make snapshots and subvolumes of a given directory and mount it as another block device. Note that it’s already stable but still has problems. Stable filesystem for production environment must be 7+ years old! I bet on the backups :)</p>
+<p>So, let’s suppose that we have two identical machines with this sample configuration:</p>
+<ul>
+<li>Intel Xeon E5;</li>
+<li>16GB of RAM;</li>
+<li>500GB RAID1 array -&gt; /dev/sda;</li>
+<li>2x 1TB RAID10 arrays -&gt; /dev/sdb and /dev/sdc;</li>
+<li>Standart gigabit interface/s -&gt; eth0;</li>
+<li>10GB Ethernet interface, linked between the machines -&gt; eth1;</li>
+</ul>]]>
+    
+    </summary>
+    
+      <category term="HA" scheme="http://petrovs.info/categories/HA/"/>
+    
+      <category term="Clusters" scheme="http://petrovs.info/categories/HA/Clusters/"/>
+    
+      <category term="Linux Containers" scheme="http://petrovs.info/categories/HA/Clusters/Linux-Containers/"/>
+    
+      <category term="DRBD" scheme="http://petrovs.info/categories/HA/Clusters/Linux-Containers/DRBD/"/>
+    
+      <category term="Virtualization" scheme="http://petrovs.info/categories/HA/Clusters/Linux-Containers/DRBD/Virtualization/"/>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/HA/Clusters/Linux-Containers/DRBD/Virtualization/IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Photosphere of the Slaveykov Hall]]></title>
+    <link href="http://petrovs.info/2014/06/16/photosphere-of-the-slaveykov-hall/"/>
+    <id>http://petrovs.info/2014/06/16/photosphere-of-the-slaveykov-hall/</id>
+    <published>2014-06-15T21:27:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>Click on the link below to view the image:</p>
+<a id="more"></a>
+<p>The newest (restored) concert and cinema hall in Sofia. It’s located inside the French Institut in Sofia.</p>
+<p>##Drag the image with the mouse to change the view and zoom in/out with the scroll</p>
+<p><div id="sphere" style="width: 100%; height: 600px;"></div></p>
+<script type="text/javascript" src="http://threejs.org/build/three.min.js"></script>
+<script async="true" onload="setup();" type="text/javascript" src="https://raw.githubusercontent.com/kennydude/photosphere/a7bcc83aa1262811d028d647bd0d629bcff2b995/lib/sphere.js"></script>
+<script type="text/javascript">
+            function setup(){
+                    sphere = new Photosphere("http://petrovs.info/images/Posts/SlaveykovHall/salle.jpg")
+                    sphere.loadPhotosphere(document.getElementById("sphere"));
+                    return false;
+            }
+</script>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Click on the link below to view the image:</p>]]>
+    
+    </summary>
+    
+      <category term="Images" scheme="http://petrovs.info/categories/Images/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Perl in the office]]></title>
+    <link href="http://petrovs.info/2014/01/17/perl-in-the-office/"/>
+    <id>http://petrovs.info/2014/01/17/perl-in-the-office/</id>
+    <published>2014-01-16T22:36:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p><a href="href="http://xkcd.com/1313/"" target="_BLANK"><img title="XKCD" src="http://imgs.xkcd.com/comics/regex_golf.png" style="border-width:0px;"></a></p>
+<p>Today Perl helped me again to solve a boring office problem. The colleagues gave me a presentation with almost 1000 slides. It was designed for a theatre subtitles. The slides was simple. Just a sentence per each slide. Only the colors was mistaken. Not black on white but white on black. My colleagues spent hours in googling for M$ Office bulk color change function. Then something blinked in me. <strong>It was Perl’s Regex {}</strong>.<br>The new open Office formats - <a href="http://en.wikipedia.org/wiki/OpenDocument" target="_blank" rel="external">ODF</a> and <a href="http://en.wikipedia.org/wiki/Office_Open_XML" target="_blank" rel="external">OOXML</a> are both zipped XML files, binary media content and files with metadata. I converted the presentation to odt (It was on the old crappy ppt) and then, just </p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">lin:/tmp/presentation$ unzip slides.odp </div><div class="line">Archive:  slides.odp</div><div class="line"> extracting: mimetype                </div><div class="line">  inflating: content.xml             </div><div class="line">  inflating: META-INF/manifest.xml   </div><div class="line">  inflating: settings.xml            </div><div class="line">  inflating: styles.xml              </div><div class="line">  inflating: meta.xml                </div><div class="line">  inflating: Thumbnails/thumbnail.png  </div></pre></td></tr></table></figure>
+<p>The interesting file for me was <strong>content.xml</strong>. It’s a verry big XML text file, so it’s hard to be read both by a human and a text editor, but Sublime Text withstand. Because the slides were very simple, there was only one text style. So, here is the interesting stanza:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;/<span class="name">style:paragraph-properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style:text-properties</span> <span class="attr">fo:font-variant</span>=<span class="string">"normal"</span> <span class="attr">fo:text-transform</span>=<span class="string">"none"</span> <span class="attr">fo:color</span>=<span class="string">"#ffffff"</span> </span></div><div class="line"><span class="attr">style:text-line-through-type</span>=<span class="string">"none"</span> <span class="attr">style:text-line-through-style</span>=<span class="string">"none"</span> <span class="attr">style:text-line-through-width</span>=<span class="string">"auto"</span> </div><div class="line"><span class="attr">style:text-line-through-color</span>=<span class="string">"font-color"</span> <span class="attr">style:text-position</span>=<span class="string">"0% 100%"</span> <span class="attr">fo:font-size</span>=<span class="string">"0.25in"</span> <span class="attr">style:font-size-asian</span>=<span class="string">"0</span></div><div class="line">.25in" <span class="attr">style:font-size-complex</span>=<span class="string">"0.25in"</span> <span class="attr">fo:letter-spacing</span>=<span class="string">"0in"</span> <span class="attr">fo:font-style</span>=<span class="string">"normal"</span> <span class="attr">style:font-style-asian</span>=<span class="string">"normal"</span></div><div class="line"> <span class="attr">style:font-style-complex</span>=<span class="string">"normal"</span> <span class="attr">style:text-underline-type</span>=<span class="string">"none"</span> </div><div class="line"> <span class="attr">style:text-underline-style</span>=<span class="string">"none"</span> <span class="attr">style:text-underline-width</span>=<span class="string">"auto"</span> <span class="attr">style:text-underline-color</span>=<span class="string">"font-color"</span> </div><div class="line"> <span class="attr">fo:font-weight</span>=<span class="string">"normal"</span> <span class="attr">style:font-weight-asian</span>=<span class="string">"normal"</span> <span class="attr">style:font-weight-complex</span>=<span class="string">"normal"</span> </div><div class="line"> <span class="attr">style:text-underline-mode</span>=<span class="string">"continuous"</span> <span class="attr">style:letter-kerning</span>=<span class="string">"false"</span>/&gt;<span class="tag">&lt;/<span class="name">style:style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>I just changed <strong>‘ fo:color=”#ffffff” ‘</strong> to <strong>‘ fo:color=”#000000” ‘</strong> with a Perl oneliner:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lin:<span class="regexp">/tmp/presentation</span>$ perl -p -i -e <span class="string">'s/fo:color=\"#ffffff\"/fo:color=\"#000000\"/g'</span> content.xml</div></pre></td></tr></table></figure>
+<p>And then, zip again..</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">lin:/tmp/presentation$ zip foo.odp content.xml meta.xml mimetype settings.xml styles.xml </div><div class="line">  adding: content.xml (deflated 97%)</div><div class="line">  adding: meta.xml (deflated 47%)</div><div class="line">  adding: mimetype (deflated 6%)</div><div class="line">  adding: settings.xml (deflated 37%)</div><div class="line">  adding: styles.xml (deflated 97%)</div><div class="line">lin:/tmp/presentation$ zip -r foo.odp META-INF</div><div class="line">  adding: META-INF/ (stored 0%)</div><div class="line">  adding: META-INF/manifest.xml (deflated 71%)</div><div class="line">lin:/tmp/presentation$ zip -r foo.odp Thumbnails</div><div class="line">  adding: Thumbnails/ (stored 0%)</div><div class="line">  adding: Thumbnails/thumbnail.png (deflated 4%)</div></pre></td></tr></table></figure>
+<p>And.. voilà! (The image is just an example. I cannot show the real one.)</p>
+<p><img src="!--￼4--&gt;/images/PerlInTheOffice/foodotodt.png" alt="picture alt" title="The slide, finnished">  </p>
+<p>PS: I changed the background from Powerpoint. It was easy in the GUI way :D</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href=href="http://xkcd.com/1313/" target="_BLANK"><img title="XKCD" src="http://imgs.xkcd.com/comics/regex_golf.png" style="border-width:0px;" /></a></p>
+<p>Today Perl helped me again to solve a boring office problem. The colleagues gave me a presentation with almost 1000 slides. It was designed for a theatre subtitles. The slides was simple. Just a sentence per each slide. Only the colors was mistaken. Not black on white but white on black. My colleagues spent hours in googling for M$ Office bulk color change function. Then something blinked in me. <strong>It was Perl’s Regex {}</strong>.<br>The new open Office formats - <a href="http://en.wikipedia.org/wiki/OpenDocument">ODF</a> and <a href="http://en.wikipedia.org/wiki/Office_Open_XML">OOXML</a> are both zipped XML files, binary media content and files with metadata. I converted the presentation to odt (It was on the old crappy ppt) and then, just </p>]]>
+    
+    </summary>
+    
+      <category term="Perl" scheme="http://petrovs.info/categories/Perl/"/>
+    
+      <category term="Office" scheme="http://petrovs.info/categories/Perl/Office/"/>
+    
+      <category term="Dirty Hacks" scheme="http://petrovs.info/categories/Perl/Office/Dirty-Hacks/"/>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/Perl/Office/Dirty-Hacks/IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[F.B. Purity]]></title>
+    <link href="http://petrovs.info/2013/11/13/f-dot-b-purity/"/>
+    <id>http://petrovs.info/2013/11/13/f-dot-b-purity/</id>
+    <published>2013-11-13T14:51:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>Some of my Facebook friends have enough free time to tepost stupid Facebook page images, Tumblr gifs and other crap. Others are just not clever enough. The worst is when there’s a new reality show on the TV, a new internet meme or “just-share-crap” trend. I don’t wanna be part of that. <strong><a href="http://www.fbpurity.com/" target="_blank" rel="external">F.B. Purity</a></strong> helps me to filter the Facebook wall with more advanced tools than the standart FB options. It supports custom words blacklist. Mine is shared on <strong><a href="https://github.com/eniac111/F.B.-PurityBlacklist" target="_blank" rel="external">GitHub</a></strong>. :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Some of my Facebook friends have enough free time to tepost stupid Facebook page images, Tumblr gifs and other crap. Others are just not ]]>
+    </summary>
+    
+      <category term="Fun IT" scheme="http://petrovs.info/categories/Fun-IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Virtualize a broken Windows XP machine with KVM or Xen, Part2]]></title>
+    <link href="http://petrovs.info/2013/11/08/virtualize-a-broken-windows-xp-machine-with-kvm-or-xen/"/>
+    <id>http://petrovs.info/2013/11/08/virtualize-a-broken-windows-xp-machine-with-kvm-or-xen/</id>
+    <published>2013-11-08T10:39:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>It’s time to convert the physical disk to a virtual image. I’m using KVM almost everywhere, so, this tutorial will be about KVM. You can use the images in Xen/VMWare almost the same way.</p>
+<a id="more"></a>
+<p>First, install the VirtIO drivers for a better performance. The Fedora team builds isos with binary executables. Check the <a href="http://www.linux-kvm.org/page/WindowsGuestDrivers/Download_Drivers" target="_BLANK">KVM documentation for the newest info.</a></p>
+<p>First, attache a new VirtIO disk image to the machine. You can use the previously generated image in the installation from Part 1 or create a new one. The size is not important. It’s needed just to recognize the new storage format in Windows.</p>
+<div style="text-align:center"><br><img id="7" src="/images/WinXPVirtRecovery/7.png" style="border-width:0px;"><br></div><br><br><br><div style="text-align:center"><br><img id="8" src="/images/WinXPVirtRecovery/8.png" style="border-width:0px;"><br></div><br><br><br><div style="text-align:center"><br><img id="9" src="/images/WinXPVirtRecovery/9.png" style="border-width:0px;"><br></div><br><br><br><div style="text-align:center"><br><img id="10" src="/images/WinXPVirtRecovery/10.png" style="border-width:0px;"><br></div>
+
+<p>When it’s installed, you can deattach and delete the temporary VirtIO disk.</p>
+<p>And now, the converting. I use mostly three tools for this thing:</p>
+<ul>
+<li><a href="http://www.vmware.com/products/converter/" target="_BLANK">VMWare vCenter Converter</a> which is a free tool by VmWare</li>
+<li>CloneZilla - Open Source Linuxdistribution for creating disk images</li>
+<li>Byte copy with dd. I don’ recommend it because will copy all of the sectors of the disk, even the “empty” ones. The dd way is OK when you will use LVM for a storage format.</li>
+</ul>
+<p>I will show you how to convert it with the VmWare tool because It’s the easiest way, I think.</p>
+<p>You need a free space somewhere to put the converted image from the tool. It’s possible to mount a directory from the server, to mount a Samba share or if the physical disk is healthy and there’s enough free space, you can put the image right in C:.</p>
+<div style="text-align:center"><br><img id="11" src="/images/WinXPVirtRecovery/11.png" style="border-width:0px;"><br><br><br>Click on “Convert machine”<br></div><br><div style="text-align:center"><br><img id="12" src="/images/WinXPVirtRecovery/12.png" style="border-width:0px;"><br><br><br>This local machine<br></div><br><img id="13" src="/images/WinXPVirtRecovery/13.png" style="border-width:0px;"><br><br><br>VmWare Workstation or other VmWare virtual machine; choose a directory<br><br><img id="14" src="/images/WinXPVirtRecovery/14.png" style="border-width:0px;"><br><br><br>Summary..<br><br><img id="14" src="/images/WinXPVirtRecovery/14.png" style="border-width:0px;"><br><br><br>And the job is running<br>
+
+<p>When it finnish, you will have a directory with the VMDK image in it. KVM supports VMDK, but it’s better to convert it to QCOWp2 with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ kvm-img convert -O qcow2 W<span class="keyword">in</span>XP.vmdk W<span class="keyword">in</span>XP.qcow2</div></pre></td></tr></table></figure>
+<p>Just put the QCOW2 image in KVM and your XP is virtual :) </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>It’s time to convert the physical disk to a virtual image. I’m using KVM almost everywhere, so, this tutorial will be about KVM. You can use the images in Xen/VMWare almost the same way.</p>]]>
+    
+    </summary>
+    
+      <category term="KVM Windows Virtualization Recovery IT" scheme="http://petrovs.info/categories/KVM-Windows-Virtualization-Recovery-IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Virtualize a broken Windows XP machine with KVM or Xen, Part1]]></title>
+    <link href="http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/"/>
+    <id>http://petrovs.info/2013/11/03/virtualize-broken-windows-xp-machine/</id>
+    <published>2013-11-03T07:48:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>There are still online many dirty legacy PCs which cannot be reinstalled. The most common problems are that they are installed with a special software and the CDs are lost or a license problems.</p>
+<a id="more"></a>
+<p><a href="http://www.flickr.com/photos/j_aroche/2423244723/" title="Maquinas sucias by Javier Aroche, on Flickr" target="_blank" rel="external"><img src="http://farm4.staticflickr.com/3217/2423244723_f0cff8ddf1.jpg" width="220" height="294" alt="Maquinas sucias" align="left"></a></p>
+<p>But what will happen when your zombie Durom 1300 dies? And your boss wants to use the accounting software ASAP.. The best scenario is when your HDD is healthy :)</p>
+<p>First, you shoud find a cheap HDD -&gt; USB converter. This is the clearest solution because I don’t want to turn off my virtual hypervisors and probably, the old machine would have an IDE HDDs. Chinese combined IDE/SATA -&gt; USB converters can be found for 15-16$.</p>
+<p><br> <br><br> <br></p>
+<div style="text-align:center"><br><img id="converter" src="http://img.dxcdn.com/productimages/sku_226847_1.jpg" style="border-width:0px;" width="200" height="300"><br><br><br>This is the one I’m using..<br></div>
+
+<p>##IMPORTANT!!! The old PC’s are too dirty and their cases are sharp and dangerous! You should have a <a href="http://en.wikipedia.org/wiki/DPT_vaccine" target="_BLANK">DPT vaccine</a> and suitable protective clothing!!!</p>
+<p>The HDD must be put on a PC with a hardware acceleration and KVM installed. In my case, my personal laptop was the salvation. I prepared a dummy VM with virt-manager, just to generate the XML file for libvirt. Use the simplest configuration. WinXP runs on an old hardware… Here are some steps in images:</p>
+<div style="text-align:center"><br><img id="Virt-Manager-1" src="/images/WinXPVirtRecovery/1.png" style="border-width:0px;"><br><br><br>…<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-4" src="/images/WinXPVirtRecovery/4.png" style="border-width:0px;"><br><br><br>Just one CPU with 1024Mb Ram is OK<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-2" src="/images/WinXPVirtRecovery/2.png" style="border-width:0px;"><br><br><br>It’s not necessary to have WinXP iso. Use something just to generate the XML for LibVirt.<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-3" src="/images/WinXPVirtRecovery/3.png" style="border-width:0px;"><br><br><br>The disk is also not revelant. It will be removed after the configuration.<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-5" src="/images/WinXPVirtRecovery/5.png" style="border-width:0px;"><br><br><br>Better use i686<br></div>
+
+<p><br></p>
+<div style="text-align:center"><br><img id="Virt-Manager-5" src="/images/WinXPVirtRecovery/5.png" style="border-width:0px;"><br><br><br>Force off the machine after this window and open the terminal.<br></div>
+
+
+<p>In the terminal, type <strong>$virsh dumpxml WinXp &gt; WinXp.xml</strong> . Open the generated text file with your text editor and find this stanzas:</p>
+<figure class="highlight xml"><figcaption><span>WinXp.xml Before..</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">disk</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">device</span>=<span class="string">'disk'</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">driver</span> <span class="attr">name</span>=<span class="string">'qemu'</span> <span class="attr">type</span>=<span class="string">'qcow2'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">file</span>=<span class="string">'/home/vms/WinXP.img'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">dev</span>=<span class="string">'hda'</span> <span class="attr">bus</span>=<span class="string">'ide'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">'ide0-0-0'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">'drive'</span> <span class="attr">controller</span>=<span class="string">'0'</span> <span class="attr">bus</span>=<span class="string">'0'</span> <span class="attr">target</span>=<span class="string">'0'</span> <span class="attr">unit</span>=<span class="string">'0'</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">disk</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">disk</span> <span class="attr">type</span>=<span class="string">'file'</span> <span class="attr">device</span>=<span class="string">'cdrom'</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">driver</span> <span class="attr">name</span>=<span class="string">'qemu'</span> <span class="attr">type</span>=<span class="string">'raw'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">file</span>=<span class="string">'/home/vms/xp64.iso'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">dev</span>=<span class="string">'hdc'</span> <span class="attr">bus</span>=<span class="string">'ide'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">readonly</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">alias</span> <span class="attr">name</span>=<span class="string">'ide0-1-0'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">'drive'</span> <span class="attr">controller</span>=<span class="string">'0'</span> <span class="attr">bus</span>=<span class="string">'1'</span> <span class="attr">target</span>=<span class="string">'0'</span> <span class="attr">unit</span>=<span class="string">'0'</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">disk</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Remove the whole stanza about the CD Rom and change the disk configuration like this:</p>
+<figure class="highlight xml"><figcaption><span>WinXp.xml After..</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">disk</span> <span class="attr">type</span>=<span class="string">'block'</span> <span class="attr">device</span>=<span class="string">'disk'</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">driver</span> <span class="attr">name</span>=<span class="string">'qemu'</span> <span class="attr">type</span>=<span class="string">'raw'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">dev</span>=<span class="string">'/dev/sdX'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">target</span> <span class="attr">dev</span>=<span class="string">'hda'</span> <span class="attr">bus</span>=<span class="string">'ide'</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">address</span> <span class="attr">type</span>=<span class="string">'drive'</span> <span class="attr">controller</span>=<span class="string">'0'</span> <span class="attr">bus</span>=<span class="string">'0'</span> <span class="attr">target</span>=<span class="string">'0'</span> <span class="attr">unit</span>=<span class="string">'0'</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">disk</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>/dev/sdX</strong> must be your hard drive, connected with the chinese gadget. Make sure it’s not mounted on the host system. Now your XP machine should run directly from the hard drive.</p>
+<p>###Converting the hard drive to a virtual image..</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>There are still online many dirty legacy PCs which cannot be reinstalled. The most common problems are that they are installed with a special software and the CDs are lost or a license problems.</p>]]>
+    
+    </summary>
+    
+      <category term="KVM Windows Virtualization Recovery IT" scheme="http://petrovs.info/categories/KVM-Windows-Virtualization-Recovery-IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[My presentation on OpenFest 2013]]></title>
+    <link href="http://petrovs.info/2013/10/28/my-presentation-on-openfest-2013/"/>
+    <id>http://petrovs.info/2013/10/28/my-presentation-on-openfest-2013/</id>
+    <published>2013-10-28T20:49:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p> This year, on OpenFest 2013 I will talk about <strong>Ulteo OVD</strong> - Open Source Application Delivery system. The conference shedule was full and there was just a place on the Lighting Talks, but it’s enough. I will cover the core functionality and some words about the company which is developing Ulteo. It’s a good idea to invite the developers on the next OpenFest.</p>
+<p> I have a working setup in the Francophone center of Sofia University, so it’s possible to show it as a demo from my laptop outside. </p>
+<p> OpenFest is the biggest conference about Free and Open Source Software and “Open Mind” in Bulgaria. Each year international guests from big projects and companies are invited. </p>
+<p> You can see the shedule and the address in the <a href="http://openfest.org" target="_BLANK">OpenFest site</a>.</p>
+<p> My slides are on <a href="https://github.com/eniac111/Openfest2013-UlteoOVDPresentation" target="_BLANK">GitHub</a>.<br> Or a temporary snapshot here: <a href="http://dallas.petrovs.info/Openfest2013-UlteoOVDPresentation" target="_BLANK">http://dallas.petrovs.info/Openfest2013-UlteoOVDPresentation</a></p>
+<p> Hope someone is interested :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p> This year, on OpenFest 2013 I will talk about <strong>Ulteo OVD</strong> - Open Source Application Delivery system. The conference shedu]]>
+    </summary>
+    
+      <category term="Conferences" scheme="http://petrovs.info/categories/Conferences/"/>
+    
+      <category term="Talking" scheme="http://petrovs.info/categories/Conferences/Talking/"/>
+    
+      <category term="System Administration" scheme="http://petrovs.info/categories/Conferences/Talking/System-Administration/"/>
+    
+      <category term="Open Source" scheme="http://petrovs.info/categories/Conferences/Talking/System-Administration/Open-Source/"/>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/Conferences/Talking/System-Administration/Open-Source/IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Horse - dummy school project]]></title>
+    <link href="http://petrovs.info/2013/10/19/horse-dummy-school-project/"/>
+    <id>http://petrovs.info/2013/10/19/horse-dummy-school-project/</id>
+    <published>2013-10-19T20:47:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p>Just a small dummy <strong>C</strong> project from the highschool, made probably in 2008. It’s completely useless. I still keep it because someone can use it as an example of using an <strong>escape characters</strong> in <strong>Bash</strong>.</p>
+<a id="more"></a>
+<p><img src="/images/horse-screenshot.png" alt="Screenshot"></p>
+<p>The code is in <a href="https://github.com/eniac111/Horse" target="_BLANK">GitHub</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Just a small dummy <strong>C</strong> project from the highschool, made probably in 2008. It’s completely useless. I still keep it because someone can use it as an example of using an <strong>escape characters</strong> in <strong>Bash</strong>.</p>]]>
+    
+    </summary>
+    
+      <category term="useless projects crap C IT" scheme="http://petrovs.info/categories/useless-projects-crap-C-IT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Ubuntu 12.04 Desktop with Zentyal 3.2]]></title>
+    <link href="http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/"/>
+    <id>http://petrovs.info/2013/10/04/ubuntu-12-dot-04-desktop-with-zentyal-3-dot-2/</id>
+    <published>2013-10-04T16:01:00.000Z</published>
+    <updated>2017-01-03T14:07:01.127Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://zentyal.org" target="_blank" rel="external">Zentyal</a>, The Linux Small Business Server includes the most important services for a small or medium company. Most of the services are integrated around OpenLdap. Since version 3.1, Zentyal uses Samba4 as a Directory and File Sharing service.</p>
+<a id="more"></a>
+<p>I’m maintaining the computers in the Francophone center in University of Sofia. Everything in this place is with Ubuntu workstations.</p>
+<p>There was a major hardware update this year. We got new servers, workstations and laptops. </p>
+<div align="center"><div class="g-post" data-href="https://plus.google.com/112216091511383101131/posts/BW8jkHFox5N"></div></div>
+
+<p>Following the info from <a href="http://forum.zentyal.org/index.php?topic=12925.0" target="_blank" rel="external">this</a> forum topic, I installed Ubuntu 12.04 LTS for the desktops and Zentyal 3.2 as a Directory and file server. Home directories are on NFS share in Zentyal, so that the users can use their own profiles on any workstation. </p>
+<p>First I decided to use Centrify DC Express (<a href="https://help.ubuntu.com/community/DirectControl" target="_blank" rel="external">Documentation</a>) as an Active Directory client Samba shares, like in the forum topic. This type of setup gave me the   possibility to use Samba 4’s advanced directory options because CentrifyDC immitates M$ Windows client and the security of Samba. It seemed to work in the first test, but then bugs appeared. There are some privilege issues with Samba. For example, PulseAudio cannot initialize on boot because it cannot create the <em>~/.pulse</em> directory. There were the simmilar issues with Firefox on some of the profiles.</p>
+<p>Then I decided to use NFS with Centrify, but another issue appeared. Centrify makes UID and GID different than the ones in Zentyal and users cannot write to their own profiles. NFSv4 can solve this problem with remapping, but it’s still not documented and there’s a lack of information on internet. If you are interested in it, you can search for <em>“/etc/idmapd.conf”</em>. </p>
+<p>So, I choosed the standard LDAP setup, like in the forum topic and NFS. Well, <a href="https://bugs.launchpad.net/ubuntu/+source/at-spi2-core/+bug/870874" target="_blank" rel="external">another bug</a> appeared but it can be fixed with a small hack. </p>
+<p>You must comment the “If” statement about gsettings (dconf) in <em>/etc/X11/Xsession.d/90qt-a11y</em> :</p>
+<figure class="highlight bash"><figcaption><span>Before (/etc/X11/Xsession.d/90qt-a11y)</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- sh -*-</span></div><div class="line"><span class="comment"># Xsession.d script to set the QT_ACCESSIBILITY env variable when accessibility</span></div><div class="line"><span class="comment"># is enabled.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># This file is sourced by Xsession(5), not executed.</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ -x <span class="string">"/usr/bin/gsettings"</span> ]; <span class="keyword">then</span></div><div class="line">        a11y_enabled=$(gsettings get org.gnome.desktop.interface toolkit-accessibility)</div><div class="line">        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$a11y_enabled</span>"</span> = <span class="string">"true"</span> ]; <span class="keyword">then</span></div><div class="line">                <span class="built_in">export</span> QT_ACCESSIBILITY=1</div><div class="line">        <span class="keyword">fi</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>After (/etc/X11/Xsession.d/90qt-a11y)</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- sh -*-</span></div><div class="line"><span class="comment"># Xsession.d script to set the QT_ACCESSIBILITY env variable when accessibility</span></div><div class="line"><span class="comment"># is enabled.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># This file is sourced by Xsession(5), not executed.</span></div><div class="line"></div><div class="line"><span class="comment">#if [ -x "/usr/bin/gsettings" ]; then</span></div><div class="line"><span class="comment">#        a11y_enabled=$(gsettings get #org.gnome.desktop.interface toolkit-accessibility)</span></div><div class="line"><span class="comment">#        if [ "$a11y_enabled" = "true" ]; then</span></div><div class="line"><span class="comment">#                export QT_ACCESSIBILITY=1</span></div><div class="line"><span class="comment">#        fi</span></div><div class="line"><span class="comment">#fi</span></div></pre></td></tr></table></figure>
+<p>According to the forum topic, you need to install these packages on the Ubuntu client to run LDAP:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install install libnss-ldap libpam-ldap libpam-mount  winbind smbclient cifs-utils ldap-utils <span class="comment">#Ignore all requests, just hit Enter</span></div></pre></td></tr></table></figure>
+<p>And for NFS:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nfs-common libpam-mount</div></pre></td></tr></table></figure>
+<p>Then, create again the file <em>/etc/ldap.conf</em> :</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">base dc=neo,dc=<span class="keyword">lan</span></div><div class="line"></div><div class="line">uri ldap://<span class="number">10.1</span>.<span class="number">100.1</span>:<span class="number">390</span></div><div class="line"></div><div class="line">ldap_version <span class="number">3</span></div><div class="line"></div><div class="line">binddn <span class="keyword">cn</span>=zentyalro,dc=neo,dc=<span class="keyword">lan</span></div><div class="line">bindpw jw4xF8KRS@IsEqxCbt=<span class="number">0</span></div><div class="line"></div><div class="line">scope sub</div><div class="line">bind_policy soft</div><div class="line">pam_password md5</div><div class="line"></div><div class="line">nss_base_passwd         <span class="keyword">ou</span>=Users,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_base_passwd         <span class="keyword">ou</span>=Computers,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_base_shadow         <span class="keyword">ou</span>=Users,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_base_group          <span class="keyword">ou</span>=Groups,dc=neo,dc=<span class="keyword">lan</span>?one</div><div class="line">nss_schema              rfc2307bis</div><div class="line">nss_map_attribute uniqueMember member</div><div class="line">nss_reconnect_tries <span class="number">2</span></div><div class="line">nss_initgroups_ignoreusers avahi,avahi-autoipd,backup,bin,colord,daemon,games,gnats,hplip,irc,kernoops,libuuid,lightdm,<span class="keyword">list</span>,<span class="keyword">lp</span>,mail,man,messagebus,news,proxy,pulse,root,rtkit,saned,speech-dispatcher,sshd,<span class="keyword">sync</span>,sys,syslog,usbmux,uucp,whoopsie,www-data</div></pre></td></tr></table></figure>
+<p><strong>Remarks:</strong></p>
+<ul>
+<li>base - see “Users and Groups - LDAP settings - LDAP information - Base DN (in the Zentyal web frontend)</li>
+<li>uri - use the IP address of your Zentyal box and Port 390 to reach Ldap</li>
+<li>binddn - run grep ^binddn /etc/ldap.conf on your Zentyal server’s shell</li>
+<li>bindpw - run grep ^bindpw /etc/ldap.conf on your Zentyal server’s shell</li>
+</ul>
+<p>Create a link for the <em>ldapsearch</em> tool:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo ln <span class="_">-s</span> /etc/ldap.conf  /etc/ldap/ldap.conf</div></pre></td></tr></table></figure>
+<p>For NSS: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo auth-client-config -t nss -p lac_ldap</div></pre></td></tr></table></figure>
+<p>You can test the configuration with <em>$id USERNAME</em> where the username must be from the Active Directory.</p>
+<p>To mount the home folder you need to insert this line in your _/etc/security/pam<em>mount.conf</em> between <em>\&lt;!– Volume definitions –></em> tags:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">volume</span> <span class="attr">fstype</span>=<span class="string">"nfs"</span> <span class="attr">server</span>=<span class="string">"yourserver.local"</span> <span class="attr">path</span>=<span class="string">"/home/%(USER)"</span> <span class="attr">mountpoint</span>=<span class="string">"~"</span> <span class="attr">options</span>=<span class="string">"rsize=8192,wsize=8192,timeo=14,intr,proto=tcp,nolock"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>It’s better to use TCP because sometimes transferring big files freezes.</li>
+<li>Nolock disables file locking. According to the manpages, this option is deprecated and is required just for an older servers. I think it’s better to be used because sometimes Firefox locks it’s profile when the session freezes and the users cannot login from other machines.</li>
+<li>rsize and wsize specifies the chunks of data that the client and server pass back and forth to each other.</li>
+</ul>
+<p>This configuration works for me, but maybe the <em>options=</em> tag must be in <em>\<mntoptions\></mntoptions\></em> tag.</p>
+<p>###About the server</p>
+<p>Zentyal is well documented. You can install and configure all the needed components in ~30 minutes. Just check <a href="http://zentyal.org" target="_blank" rel="external">Zentyal.org</a>.<br>Additionaly, you need the configure the NFS server. These packages must be installed:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install nfs-kernel-server nfs-common</div></pre></td></tr></table></figure>
+<p>Then, you must configure the <em>/etc/exports</em> file. Just add this line:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/home   10.10.10.0/24(rw,sync,no_subtree_check)</div></pre></td></tr></table></figure>
+<p>Where 10.10.10.0/24 must be your network and netmask.</p>
+<p>There are many advanced NFS options. Experiment, if you want :) NFSv4 even supports Kerberos authentication, but it’s still undocumented.</p>
+<p>Everything must work with this setup. If you login to the client with AD username, you can see this:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">cfadmin@lenovo5:~$ su blagovest</div><div class="line">Mot de passe : </div><div class="line">blagovest@lenovo5:/home/cfadmin$ <span class="built_in">cd</span></div><div class="line">blagovest@lenovo5:~$ df -h</div><div class="line">df: «/var/lib/lightdm/.gvfs»: Permission non accordée</div><div class="line">Sys. de fichiers      Taille Utilisé Dispo Uti% Monté sur</div><div class="line">/dev/sda1               230G    6,3G  212G   3% /</div><div class="line">udev                    1,9G    4,0K  1,9G   1% /dev</div><div class="line">tmpfs                   744M    896K  743M   1% /run</div><div class="line">none                    5,0M       0  5,0M   0% /run/lock</div><div class="line">none                    1,9G    144K  1,9G   1% /run/shm</div><div class="line">cgroup                  1,9G       0  1,9G   0% /sys/fs/cgroup</div><div class="line">cf.lo:/home/blagovest   351G    2,4G  331G   1% /home/blagovest</div><div class="line">blagovest@lenovo5:~$ </div></pre></td></tr></table></figure>
+<p>The home directory doesn’t unmount sometimes, but it can be fine configured from _/etc/security_pam<em>mount.conf</em> . I will be glad if someone fix it :)</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://zentyal.org">Zentyal</a>, The Linux Small Business Server includes the most important services for a small or medium company. Most of the services are integrated around OpenLdap. Since version 3.1, Zentyal uses Samba4 as a Directory and File Sharing service.</p>]]>
+    
+    </summary>
+    
+      <category term="Zentyal" scheme="http://petrovs.info/categories/Zentyal/"/>
+    
+      <category term="System Administration" scheme="http://petrovs.info/categories/Zentyal/System-Administration/"/>
+    
+      <category term="LDAP" scheme="http://petrovs.info/categories/Zentyal/System-Administration/LDAP/"/>
+    
+      <category term="NFS" scheme="http://petrovs.info/categories/Zentyal/System-Administration/LDAP/NFS/"/>
+    
+      <category term="Ubuntu" scheme="http://petrovs.info/categories/Zentyal/System-Administration/LDAP/NFS/Ubuntu/"/>
+    
+      <category term="IT" scheme="http://petrovs.info/categories/Zentyal/System-Administration/LDAP/NFS/Ubuntu/IT/"/>
+    
+  </entry>
+  
+</feed>

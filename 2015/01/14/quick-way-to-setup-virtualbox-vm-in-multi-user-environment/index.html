@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Blagovest Petrov&#39;s blog">
+    <title>Quick way to setup VirtualBox VM in multi user environment - Blagovest Petrov&#39;s blog</title>
+    <meta name="author" content="Blagovest Petrov">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstation">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Quick way to setup VirtualBox VM in multi user environment">
+<meta property="og:url" content="http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/index.html">
+<meta property="og:site_name" content="Blagovest Petrov's blog">
+<meta property="og:description" content="Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstation">
+<meta property="og:image" content="http://petrovs.info/images/winxpsnap/regedit.png">
+<meta property="og:image" content="http://petrovs.info/images/winxpsnap/snapshot.png">
+<meta property="og:updated_time" content="2017-01-03T14:07:01.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Quick way to setup VirtualBox VM in multi user environment">
+<meta name="twitter:description" content="Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstation">
+<meta name="twitter:image" content="http://petrovs.info/images/winxpsnap/regedit.png">
+<meta name="twitter:creator" content="@eniac111">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=640"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-jmppwtxqojdd59fujmtahmifbyjlghgbsyo4iyb4qt6wnumuaxijkggtpdo9.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44632309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Blagovest Petrov&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">Blagovest Petrov</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">Github</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://linkedin.com/in/blpetrov" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                    <span class="sidebar-button-desc">LinkedIn</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:blagovest@petrovs.info" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Quick way to setup VirtualBox VM in multi user environment
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Wed Jan 14 2015 12:07:00 GMT+0200">
+	
+		    Jan 14, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/IT/">IT</a>, <a class="category-link" href="/categories/IT/Virtualization/">Virtualization</a>, <a class="category-link" href="/categories/IT/Virtualization/Ubuntu/">Ubuntu</a>, <a class="category-link" href="/categories/IT/Virtualization/Ubuntu/Tools/">Tools</a>, <a class="category-link" href="/categories/IT/Virtualization/Ubuntu/Tools/VirtualBox/">VirtualBox</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Let’s assume that we need to setup VirtualBox VM with Windows XP and an old version of Microsoft Office. The machine must be used from everyone on a given number of Linux workstations. The workstations may work with LDAP and NFS/Cifs. The standard installation of the VM would be extremely space consuming and it would cost a lot of the personal life of the administrator.<br>I made an easy hack to solve this ( this is real setup in university labs).</p>
+<a id="more"></a>
+<p>Let’s install a standard local Windows XP virtual machine and permanently mount the local directories <em>/home/trendafil</em> and <em>/media</em> .<br>In this example, the home directory of the user will be mounted on <em>X:\</em> on Windows and media will be <em>Z:\</em> .</p>
+<p>The important directories are out of the VM. So, the virtual machine will be runned from snapshot on every boot.<br>The next useful step is to move the default user profile outside the VM. I don’t need something different than <em>My Documents</em> but in other cases, everything from the profile can be exported to <em>/home</em>, outside the VM. So, open <em>“regedit”</em> in Windows and go to the</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HKEY_CURRENT_USER<span class="symbol">\S</span>oftware<span class="symbol">\M</span>icrosoft<span class="symbol">\W</span>indows<span class="symbol">\C</span>urrentVersion<span class="symbol">\E</span>xplorer<span class="symbol">\S</span>hell User Folders</div></pre></td></tr></table></figure>
+<p>and change the key <em>“My Documents”</em> to <em>X:\</em></p>
+<p><img src="/images/winxpsnap/regedit.png" alt="Regedit"></p>
+<p>Turn off the VM and create an empty snapshot</p>
+<p><img src="/images/winxpsnap/snapshot.png" alt="Creating the snapshot"></p>
+<p>Next, move the VM from <em>~/VirtualBox VMs</em> to <em>~/.config/VirtualBox</em> if it’s the official VirtualBox edition or <em>~/.VirtualBox</em> for the open source edition from the Ubuntu repositories. </p>
+<p>Open the file <em>~/.config/VirtualBox/VirtualBox.xml</em> and clean it from the needless stuff: </p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;ExtraDataItem name=<span class="string">"GUI/RecentFolderHD"</span>......;</div><div class="line">&lt;ExtraDataItem name=<span class="string">"GUI/RecentListHD"</span> ....... and etc..</div></pre></td></tr></table></figure>
+<p>Change the location of the VM and replace your username with “<em>CURRENTUSR</em>“ everywhere inside the file, like this:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="tag">&lt;<span class="name">MachineRegistry</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">MachineEntry</span> <span class="attr">uuid</span>=<span class="string">"&#123;64245cfc-36c6-4112-9869-d5b9da817fca&#125;"</span> <span class="attr">src</span>=<span class="string">"/home/_CURRENTUSR_/.VirtualBox/WinXP/WinXP.vbox"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">MachineRegistry</span>&gt;</span></div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">SystemProperties</span> <span class="attr">defaultMachineFolder</span>=<span class="string">"/home/_CURRENTUSR_/VirtualBox VMs"</span> <span class="attr">defaultHardDiskFormat</span>=<span class="string">"VDI"</span> <span class="attr">VRDEAuthLibrary</span>=<span class="string">"VBoxAuth"</span> <span class="attr">webServiceAuthLibrary</span>=<span class="string">"VBoxAuth"</span> <span class="attr">LogHistoryCount</span>=<span class="string">"3"</span> <span class="attr">exclusiveHwVirt</span>=<span class="string">"true"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>Also, replace the username the same way in <em>“~/.VirtualBox/WinXP/WinXP.xml”</em></p>
+<p>Change the location of the harddisk image to <em>/var/vbox/</em> like this: </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">HardDisk</span> <span class="attr">uuid</span>=<span class="string">"&#123;c052dc96-569b-4873-a799-2a75497404db&#125;"</span> <span class="attr">location</span>=<span class="string">"/var/vbox/winxp.vmdk"</span> <span class="attr">format</span>=<span class="string">"VMDK"</span> <span class="attr">type</span>=<span class="string">"Normal"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Create the directory <em>/var/vbox/</em> and then move the harddisk image from <em>~/.VirtualBox/WinXp/winxp.vmdk</em> to <em>/var/vbox</em> .</p>
+<p>Then, move the whole <em>~/.VirtualBox</em> or <em>~/.config/VirtualBox</em> to <em>/var/vbox</em></p>
+<p>Install Zenity if it’s not installed:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install zenity</div></pre></td></tr></table></figure>
+<p>Download this file and put it on /usr/local/bin/startwin: </p>
+<script src="https://gist.github.com/eniac111/00fcc0afd16e57172fce.js"></script>
+
+<p>and make it executable: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># chmod +x /usr/local/bin/startwin</span></div></pre></td></tr></table></figure>
+<p>It should work now. Every user of the system can start the VM from the script. </p>
+<p>Additionaly, you can create a desktop enry.<br>First, find an ugly Window$ logo with an open license and put it on <em>/usr/share/icons/win.png</em>. Then, create the file <em>/usr/share/applications/startwin.desktop</em> with this content: </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="section"></span></div><div class="line">[Desktop Entry]</div><div class="line"><span class="attr">Encoding</span>=UTF-<span class="number">8</span></div><div class="line"><span class="attr">Version</span>=<span class="number">1.0</span></div><div class="line"><span class="attr">Name</span>=Windows XP</div><div class="line"><span class="attr">GenericName</span>=Windows XP</div><div class="line"><span class="attr">Type</span>=Application</div><div class="line"><span class="attr">Exec</span>=/usr/lcal/bin/startwin</div><div class="line"><span class="attr">TryExec</span>=/usr/local/bin/startwin</div><div class="line"><span class="attr">Icon</span>=/usr/share/icons/win.png</div><div class="line"><span class="attr">Categories</span>=Emulator;System;Application;</div><div class="line"><span class="attr">Comment</span>=WindowsXP VirtualBox WM</div><div class="line"></div></pre></td></tr></table></figure>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/"  data-tooltip="Quick way to setup VirtualBox VM in multi user environment">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/21/quick-utility-for-enterprise-security/" data-tooltip="Quick utility for enterprise security">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Blagovest Petrov. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/"  data-tooltip="Quick way to setup VirtualBox VM in multi user environment">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/21/quick-utility-for-enterprise-security/" data-tooltip="Quick utility for enterprise security">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+        
+            <h4 id="about-card-name">Blagovest Petrov</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Sofia, Bulgaria
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-iaehp5thor0pbqgcyblrct5rsvhmqrvbuwm0kto0ectv5cpss8ylmorjlrhv.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://petrovs.info/2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/';
+                 this.page.identifier = '2015/01/14/quick-way-to-setup-virtualbox-vm-in-multi-user-environment/';
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'blagosblog';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

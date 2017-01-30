@@ -1,0 +1,605 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Blagovest Petrov&#39;s blog">
+    <title>Manual HA Cluster with Linux Containers, DRBD and Btrfs - Blagovest Petrov&#39;s blog</title>
+    <meta name="author" content="Blagovest Petrov">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="In this post I’m gonna explain you how to deploy really fast and cheap cluster of Linux Containers. I use the same setup in a production enviroment for a big accounting software (10GB++ of MySQL). 
+
+W">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Manual HA Cluster with Linux Containers, DRBD and Btrfs">
+<meta property="og:url" content="http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/index.html">
+<meta property="og:site_name" content="Blagovest Petrov's blog">
+<meta property="og:description" content="In this post I’m gonna explain you how to deploy really fast and cheap cluster of Linux Containers. I use the same setup in a production enviroment for a big accounting software (10GB++ of MySQL). 
+
+W">
+<meta property="og:image" content="http://petrovs.info/images/lxccluster/diagram1.jpeg">
+<meta property="og:updated_time" content="2017-01-03T14:07:01.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Manual HA Cluster with Linux Containers, DRBD and Btrfs">
+<meta name="twitter:description" content="In this post I’m gonna explain you how to deploy really fast and cheap cluster of Linux Containers. I use the same setup in a production enviroment for a big accounting software (10GB++ of MySQL). 
+
+W">
+<meta name="twitter:image" content="http://petrovs.info/images/lxccluster/diagram1.jpeg">
+<meta name="twitter:creator" content="@eniac111">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=640"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-jmppwtxqojdd59fujmtahmifbyjlghgbsyo4iyb4qt6wnumuaxijkggtpdo9.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44632309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Blagovest Petrov&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">Blagovest Petrov</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">Github</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://linkedin.com/in/blpetrov" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                    <span class="sidebar-button-desc">LinkedIn</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:blagovest@petrovs.info" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Manual HA Cluster with Linux Containers, DRBD and Btrfs
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Nov 28 2014 19:20:00 GMT+0200">
+	
+		    Nov 28, 2014
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/HA/">HA</a>, <a class="category-link" href="/categories/HA/Clusters/">Clusters</a>, <a class="category-link" href="/categories/HA/Clusters/Linux-Containers/">Linux Containers</a>, <a class="category-link" href="/categories/HA/Clusters/Linux-Containers/DRBD/">DRBD</a>, <a class="category-link" href="/categories/HA/Clusters/Linux-Containers/DRBD/Virtualization/">Virtualization</a>, <a class="category-link" href="/categories/HA/Clusters/Linux-Containers/DRBD/Virtualization/IT/">IT</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>In this post I’m gonna explain you how to deploy really fast and cheap cluster of Linux Containers. I use the same setup in a production enviroment for a big accounting software (10GB++ of MySQL). </p>
+<img src="http://petrovs.info/images/lxccluster/diagram1.jpeg" class="center" title="Schematic of the setup">
+<p>Why <a href="https://linuxcontainers.org/" target="_blank" rel="external">LXC</a>? Because it is Über-cool! Compared to the Hardware Virtualization, the runtime performance is near the bare metal speeds. Operations like starting/stopping of the system or clonning and snapshots are really fast. There’s no virtual BIOS, boot loader and kernel. A given number of containers can share the same system resources as they are installed on the same bare metal system and are still isolated. It’s really lightweight and flexible. You can containerize everything - a whole system or a single application. <a href="https://www.stgraber.org/2013/12/27/lxc-1-0-container-storage/" target="_blank" rel="external">Stéphane Graber</a> has a really good blog post series about LXC.</p>
+<p><a href="http://www.drbd.org/" target="_blank" rel="external">DRBD</a> will provide the block device replication between the servers. Let’s think of it as a RAID1 array between the two machines. It can work as master-master or master-slave. The master-master setup is more risky and it works only with shared cluster file systems (GFS, OCFS2 or GlusterFS). I don’t have the balls to use it master-master on two nodes for VM’s and containers, so in this setup I’ll use master-slave. The difference is that when an array is promoted as slave on a given machine, it cannot be accessed.</p>
+<p><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page" target="_blank" rel="external">Btrfs</a> is the new hipster in town :) It’s a new “copy on write” file system and logical volume manager for the Linux kernel. It has many similarities with the ZFS, but is part of the kernel. Snapshotting and cloning of the containers are easier with Btrfs. It can make snapshots and subvolumes of a given directory and mount it as another block device. Note that it’s already stable but still has problems. Stable filesystem for production environment must be 7+ years old! I bet on the backups :)</p>
+<p>So, let’s suppose that we have two identical machines with this sample configuration:</p>
+<ul>
+<li>Intel Xeon E5;</li>
+<li>16GB of RAM;</li>
+<li>500GB RAID1 array -&gt; /dev/sda;</li>
+<li>2x 1TB RAID10 arrays -&gt; /dev/sdb and /dev/sdc;</li>
+<li>Standart gigabit interface/s -&gt; eth0;</li>
+<li>10GB Ethernet interface, linked between the machines -&gt; eth1;</li>
+</ul>
+<a id="more"></a>
+<p>First, install standart Ubuntu LTS on the RAID1 arrays and don’t touch the RAID10.</p>
+<p>#The Network</p>
+<p>The containers will use veth network, so we need to create a bridge:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install bridge-utils</div></pre></td></tr></table></figure>
+<p>Our internet network will be 10.1.0.0/24 and our peer network - 10.0.254.0/30.<br>So, <em>/etc/network/interfaces</em> of node1 will be:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet manual</div><div class="line"></div><div class="line">auto br0</div><div class="line">iface br0 inet static</div><div class="line">	address 10.1.0.5</div><div class="line">	netmask 255.255.255.0</div><div class="line">	gateway 10.1.0.1 <span class="comment">#ok, let's put a gateway:)</span></div><div class="line">	bridge_ports eth0</div><div class="line">	bridge_fd 0</div><div class="line">	bridge_stp off</div><div class="line">	bridge_maxwait 0</div><div class="line"></div><div class="line">auto eth1</div><div class="line">iface eth1 inet static</div><div class="line">	address 10.0.254.1</div><div class="line">	netmask 255.255.255.252</div></pre></td></tr></table></figure>
+<p>And for node2:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line">	address 10.1.0.6</div><div class="line">	netmask 255.255.255.0</div><div class="line">	gateway 10.1.0.1</div><div class="line"></div><div class="line">auto eth1</div><div class="line">iface eth1 inet static</div><div class="line">	address 10.0.254.2</div><div class="line">	netmask 255.255.255.252</div></pre></td></tr></table></figure>
+<p>… and the hostnames in /etc/hosts. DRBD works with hostnames. On the both machines:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">127.0.0.1	localhost</div><div class="line">10.0.254.1	node1</div><div class="line">10.0.254.2	node2</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>restart the network</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service networking restart</div></pre></td></tr></table></figure>
+<p>#DRBD</p>
+<p>Be sure to check the official documentation. The setup of DRBD is really complex and personal, depending on the hardware, the network and the required results.</p>
+<figure class="highlight bash"><figcaption><span>Installing drbd on the both machines</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install drbd8-utils</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Load the kernel module</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install drbd8-utils</div></pre></td></tr></table></figure>
+<p>The time must be in sync for the DRBD. So, install NTP clien:</p>
+<figure class="highlight bash"><figcaption><span>on the both machines</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ntp ntpdate</div></pre></td></tr></table></figure>
+<p>On this tutorial I will use the whole RAID10 arrays. It would be better if we completely erase the partition tables (if any) and start from scratch with a new partition table and just one, empty partition.<br>Erase the partition tables on the both of the nodes. I expect the drive numbers to be identical because the hardware is the same:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdb bs=1M count=10</div><div class="line">sudo dd <span class="keyword">if</span>=/dev/zero of=/dev/sdc bs=1M count=10</div></pre></td></tr></table></figure>
+<p>DRBD can also be setup in LVM logical volume.</p>
+<p>Let’s take a look at the partition layout of the drives. For the example in the tutorial, I use a qcow2 image, mounted on my laptop and some information like the disk identifier and model will not appear. Also, <strong>sda</strong> is not sized for server usage.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">sudo fdisk <span class="_">-l</span></div><div class="line"></div><div class="line">Disk /dev/sda: 750.2 GB, 750156374016 bytes</div><div class="line">255 heads, 63 sectors/track, 91201 cylinders, total 1465149168 sectors</div><div class="line">Units = sectors of 1 * 512 = 512 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 4096 bytes</div><div class="line">I/O size (minimum/optimal): 4096 bytes / 4096 bytes</div><div class="line">Disk identifier: 0x1f956bec</div><div class="line"></div><div class="line">   Device Boot      Start         End      Blocks   Id  System</div><div class="line">/dev/sda1   *        2048      409599      203776    7  HPFS/NTFS/exFAT</div><div class="line">/dev/sda2          409600   646677178   323133789+   7  HPFS/NTFS/exFAT</div><div class="line">/dev/sda3       646678526  1464936447   409128961    5  Extended</div><div class="line">Partition 3 does not start on physical sector boundary.</div><div class="line">/dev/sda4      1464936448  1465147119      105336    c  W95 FAT32 (LBA)</div><div class="line">/dev/sda5       646678528   689645567    21483520   83  Linux</div><div class="line">/dev/sda6       689647616   693645311     1998848   82  Linux swap / Solaris</div><div class="line">/dev/sda7       693647360  1464936447   385644544   83  Linux</div><div class="line"></div><div class="line"></div><div class="line">Disk /dev/sdb: 1099.5 GB, 1099511627776 bytes</div><div class="line">255 heads, 63 sectors/track, 133674 cylinders, total 2147483648 sectors</div><div class="line">Units = sectors of 1 * 512 = 512 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line">Disk /dev/sdb doesn\<span class="string">'t contain a valid partition table</span></div><div class="line"></div><div class="line">Disk /dev/sdc: 1099.5 GB, 1099511627776 bytes</div><div class="line">255 heads, 63 sectors/track, 133674 cylinders, total 2147483648 sectors</div><div class="line">Units = sectors of 1 * 512 = 512 bytes</div><div class="line">Sector size (logical/physical): 512 bytes / 512 bytes</div><div class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</div><div class="line">Disk identifier: 0x00000000</div><div class="line"></div><div class="line">Disk /dev/sdc doesn\'t contain a valid partition table</div><div class="line"></div></pre></td></tr></table></figure>
+<p>To partition the drives, I will use parted. The <strong>-a optimal</strong> flag will ensure that the partitions are properly aligned.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo parted <span class="_">-a</span> optimal /dev/sdb</div><div class="line"></div><div class="line">GNU Parted 2.3</div><div class="line">Using /dev/sdb</div><div class="line">Welcome to GNU Parted! Type <span class="string">'help'</span> to view a list of commands.</div><div class="line">(parted) </div></pre></td></tr></table></figure>
+<p>…and create a new partition table:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parted) mklabel msdos</div></pre></td></tr></table></figure>
+<p>View the available disk space</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(parted) <span class="built_in">print</span> free</div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdb: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start   End     Size    Type  File system  Flags</div><div class="line">        32,3kB  1100GB  1100GB        Free Space</div></pre></td></tr></table></figure>
+<p>And an overview of the partitions on all drives:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">(parted) <span class="built_in">print</span> all</div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdb: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start  End  Size  Type  File system  Flags</div><div class="line"></div><div class="line"></div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdc: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start  End  Size  Type  File system  Flags</div><div class="line"></div><div class="line"></div><div class="line">Model: ATA Hitachi HTS54757 (scsi)</div><div class="line">Disk /dev/sda: 750GB</div><div class="line">Sector size (logical/physical): 512B/4096B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start   End    Size    Type      File system     Flags</div><div class="line"> 1      1049kB  210MB  209MB   primary   ntfs            boot</div><div class="line"> 2      210MB   331GB  331GB   primary   ntfs</div><div class="line"> 3      331GB   750GB  419GB   extended</div><div class="line"> 5      331GB   353GB  22,0GB  logical   ext4</div><div class="line"> 6      353GB   355GB  2047MB  logical   linux-swap(v1)</div><div class="line"> 7      355GB   750GB  395GB   logical   ext4</div><div class="line"> 4      750GB   750GB  108MB   primary   fat32           lba</div><div class="line"></div><div class="line">(parted)</div></pre></td></tr></table></figure>
+<p>Create a primary partitions on /dev/sdb and /dev/sdc using all the available disk space. Start at 1049kB, the same block that is used on /dev/sda.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parted) mkpart primary 1049kB 1100GB</div></pre></td></tr></table></figure>
+<p>And see the new partition: </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">(parted) <span class="built_in">print</span> free                                                        </div><div class="line">Model: Unknown (unknown)</div><div class="line">Disk /dev/sdb: 1100GB</div><div class="line">Sector size (logical/physical): 512B/512B</div><div class="line">Partition Table: msdos</div><div class="line"></div><div class="line">Number  Start   End     Size    Type     File system  Flags</div><div class="line">        32,3kB  1049kB  1016kB           Free Space</div><div class="line"> 1      1049kB  1100GB  1100GB  primary</div></pre></td></tr></table></figure>
+<p>Check if the partition is properly aligned:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(parted) align-check opt 1</div></pre></td></tr></table></figure>
+<p>Backup the default DRBD configuration:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/drbd.conf /root/drbd.conf.back</div><div class="line">sudo cp /etc/drbd.d/global_common.conf /root/glonal_common.conf.back</div></pre></td></tr></table></figure>
+<p>On Ubuntu 14.04, the section <em>“common”</em> is added to <em>/etc/drbd.d/global_common.conf</em>. Add syncer rate:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">global &#123;</div><div class="line">	usage-count no;</div><div class="line">	<span class="comment"># minor-count dialog-refresh disable-ip-verification</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">common &#123;</div><div class="line">	handlers &#123;</div><div class="line">		<span class="comment"># These are EXAMPLE handlers only.</span></div><div class="line">		<span class="comment"># They may have severe implications,</span></div><div class="line">		<span class="comment"># like hard resetting the node under certain circumstances.</span></div><div class="line">		<span class="comment"># Be careful when chosing your poison.</span></div><div class="line"></div><div class="line">		<span class="comment"># pri-on-incon-degr "/usr/lib/drbd/notify-pri-on-incon-degr.sh; /usr/lib/drbd/notify-emergency-reboot.sh; echo b &gt; /proc/sysrq-trigger ; reboot -f";</span></div><div class="line">		<span class="comment"># pri-lost-after-sb "/usr/lib/drbd/notify-pri-lost-after-sb.sh; /usr/lib/drbd/notify-emergency-reboot.sh; echo b &gt; /proc/sysrq-trigger ; reboot -f";</span></div><div class="line">		<span class="comment"># local-io-error "/usr/lib/drbd/notify-io-error.sh; /usr/lib/drbd/notify-emergency-shutdown.sh; echo o &gt; /proc/sysrq-trigger ; halt -f";</span></div><div class="line">		<span class="comment"># fence-peer "/usr/lib/drbd/crm-fence-peer.sh";</span></div><div class="line">		<span class="comment"># split-brain "/usr/lib/drbd/notify-split-brain.sh root";</span></div><div class="line">		<span class="comment"># out-of-sync "/usr/lib/drbd/notify-out-of-sync.sh root";</span></div><div class="line">		<span class="comment"># before-resync-target "/usr/lib/drbd/snapshot-resync-target-lvm.sh -p 15 -- -c 16k";</span></div><div class="line">		<span class="comment"># after-resync-target /usr/lib/drbd/unsnapshot-resync-target-lvm.sh;</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	startup &#123;</div><div class="line">		<span class="comment"># wfc-timeout degr-wfc-timeout outdated-wfc-timeout wait-after-sb</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	options &#123;</div><div class="line">		<span class="comment"># cpu-mask on-no-data-accessible</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	disk &#123;</div><div class="line">		<span class="comment"># size max-bio-bvecs on-io-error fencing disk-barrier disk-flushes</span></div><div class="line">		<span class="comment"># disk-drain md-flushes resync-rate resync-after al-extents</span></div><div class="line">                <span class="comment"># c-plan-ahead c-delay-target c-fill-target c-max-rate</span></div><div class="line">                <span class="comment"># c-min-rate disk-timeout</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	net &#123;</div><div class="line">		<span class="comment"># protocol timeout max-epoch-size max-buffers unplug-watermark</span></div><div class="line">		<span class="comment"># connect-int ping-int sndbuf-size rcvbuf-size ko-count</span></div><div class="line">		<span class="comment"># allow-two-primaries cram-hmac-alg shared-secret after-sb-0pri</span></div><div class="line">		<span class="comment"># after-sb-1pri after-sb-2pri always-asbp rr-conflict</span></div><div class="line">		<span class="comment"># ping-timeout data-integrity-alg tcp-cork on-congestion</span></div><div class="line">		<span class="comment"># congestion-fill congestion-extents csums-alg verify-alg</span></div><div class="line">		<span class="comment"># use-rle</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">        syncer &#123;</div><div class="line">                rate 200M;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The <em>“syncer rate”</em> option is dependable on the hardware and the network. It’s necessary to look the <a href="http://www.drbd.org/users-guide-8.3/s-configure-syncer-rate.html" target="_blank" rel="external">official documentation</a>.</p>
+<p>And the most important - <em>drbd.conf</em>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># You can find an example in  /usr/share/doc/drbd.../drbd.conf.example</span></div><div class="line"></div><div class="line">include <span class="string">"drbd.d/global_common.conf"</span>;</div><div class="line">include <span class="string">"drbd.d/*.res"</span>;</div><div class="line"></div><div class="line">resource r0 &#123;</div><div class="line">        protocol C;</div><div class="line">        startup &#123;</div><div class="line">                wfc-timeout 15;</div><div class="line">                degr-wfc-timeout 60;</div><div class="line">                become-primary-on node1;</div><div class="line">        &#125;</div><div class="line">        net &#123;</div><div class="line">                cram-hmac-alg sha1;</div><div class="line">                shared-secret <span class="string">"super_secret_random_code"</span>;</div><div class="line">        &#125;</div><div class="line">        on node1 &#123;</div><div class="line">                device /dev/drbd0;</div><div class="line">                disk /dev/sdb1;</div><div class="line">                address 10.0.254.1:7788;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">        on node2 &#123;</div><div class="line">                device /dev/drbd0;</div><div class="line">                disk /dev/sdb1;</div><div class="line">                address 10.0.254.2:7788;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">resource r1 &#123;</div><div class="line">        protocol C;</div><div class="line">        startup &#123;</div><div class="line">                wfc-timeout 15;</div><div class="line">                degr-wfc-timeout 60;</div><div class="line">                become-primary-on node1;</div><div class="line">        &#125;</div><div class="line">        net &#123;</div><div class="line">                cram-hmac-alg sha1;</div><div class="line">                shared-secret <span class="string">"another_super_secret_code"</span>;</div><div class="line">        &#125;</div><div class="line">        on node1 &#123;</div><div class="line">                device /dev/drbd1;</div><div class="line">                disk /dev/sdc1;</div><div class="line">                address 10.0.254.1:7789;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">        on node2 &#123;</div><div class="line">                device /dev/drbd2;</div><div class="line">                disk /dev/sdc1;</div><div class="line">                address 10.0.254.2:7789;</div><div class="line">                meta-disk internal;</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>Initialize the metadata storage:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo drbdadm create-md r0</div><div class="line">sudo drbdadm create-md r1</div></pre></td></tr></table></figure>
+<p>Start DRBD:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/drbd start</div></pre></td></tr></table></figure>
+<p>To start the sync process, make the first server the primary node. Exceute this on the first server only:</p>
+<figure class="highlight bash"><figcaption><span>Only on node1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo drbdadm -- --overwrite-data-of-peer primary all</div></pre></td></tr></table></figure>
+<p>Simmilar to the Linux software raid, you can monitor the process in <em>“/proc/drbd”</em>.</p>
+<p>After the sync is finnished, promote r1 (/dev/drbd1) to the second node:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drbdadm secondary r1</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drbdadm primary r1</div></pre></td></tr></table></figure>
+<p>The DRBD is done, let’s setup the Btrfs.</p>
+<p>#Btrfs</p>
+<p>First, create directories for the mount points:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /srv/&#123;store1,store2&#125;</div></pre></td></tr></table></figure>
+<p>Install Btrfs</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install btrfs-tools</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkfs.btrfs /dev/drbd0</div><div class="line">mount /dev/drbd0 /srv/store1</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mkfs.btrfs /dev/drbd1</div><div class="line">mount /dev/drbd1 /dev/store2</div></pre></td></tr></table></figure>
+<p>Let’s see the available space:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">du -h /srv/store1</div><div class="line">Filesystem   Size Used Avail Use% Mounted on</div><div class="line">/dev/drbd0      1,0T  384K  1023G   1% /srv/store1</div></pre></td></tr></table></figure>
+<p>It would be identical on node2.</p>
+<p>Ok, it’s time for the Lxc.</p>
+<p>#LXC</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install lxc</div></pre></td></tr></table></figure>
+<p>Create directories for the containers:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /srv/store1/containers</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir /srv/store2/containers</div></pre></td></tr></table></figure>
+<p>Change the default path in <em>/etc/lxc.conf</em>. The file may doesn’t exist:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lxc.lxcpath = /srv/store1/containers</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><figcaption><span>Only on node 2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lxc.lxcpath = /srv/store2/containers</div></pre></td></tr></table></figure>
+<p>Change the default veth network to br0 in <em>/etc/lxc/default.conf</em>:</p>
+<figure class="highlight bash"><figcaption><span>On both servers</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">lxc.betwork.type = veth</div><div class="line">lxc.network.link = br0</div><div class="line">lxc.network.flags = up</div><div class="line">lxc.network.hwaddr = 00:16:3e:xx:xx:xx</div></pre></td></tr></table></figure>
+<p>#Tests</p>
+<p>The system should be ready for production. Let’s create the first template. In Node1, for example:</p>
+<figure class="highlight bash"><figcaption><span>Only on node 1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lxc-create -t ubuntu -n mysql -B btrfs</div></pre></td></tr></table></figure>
+<p>Without <em>“-b btrfs”</em>, the container’s backing store will be treated as a filesystem directory and the snapshots and clones will be created with simple file copy. </p>
+<p>Copy with <em>scp</em> the files <em>/srv/store1/containers/mysql/config</em> and <em>/srv/store1/containers/mysql/fstab</em> to the according directory in node2 - <em>/srv/store2/containers/mysql/ . This is necessary for the failover setup. If, for example, node1 fails, the container </em>“mysql”<em> will be easily run from node2 if the </em>/dev/drbd0* is promoted as a primary there:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">drbdadm primary r1</div><div class="line">mount /dev/drbd0 /srv/store1</div><div class="line">lxc-start -n mysql <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>##Snapshot can be created with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lxc-snapshot -n mysql</div><div class="line">lxc-snapshot -n mysql -L <span class="comment">#will list the snapshots</span></div><div class="line">lxc-snapshot -n mysql <span class="_">-d</span> snap0 <span class="comment"># will delete snap0</span></div></pre></td></tr></table></figure>
+<p>There is a lot of documentation available about the LXC commands and configuration options. I’ll post a small howto anyway. I’m still writing backup scripts with the LXC api. If they are done, I’ll post documentation about the backup.</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/08/gmail-is-integrated-with-github/"  data-tooltip="Gmail is integrated with GitHub!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/06/16/photosphere-of-the-slaveykov-hall/" data-tooltip="Photosphere of the Slaveykov Hall">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Blagovest Petrov. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/12/08/gmail-is-integrated-with-github/"  data-tooltip="Gmail is integrated with GitHub!">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/06/16/photosphere-of-the-slaveykov-hall/" data-tooltip="Photosphere of the Slaveykov Hall">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+        
+            <h4 id="about-card-name">Blagovest Petrov</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Sofia, Bulgaria
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-iaehp5thor0pbqgcyblrct5rsvhmqrvbuwm0kto0ectv5cpss8ylmorjlrhv.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://petrovs.info/2014/11/28/ha-cluster-with-linux-containers/';
+                 this.page.identifier = '2014/11/28/ha-cluster-with-linux-containers/';
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'blagosblog';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>

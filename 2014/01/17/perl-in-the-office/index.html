@@ -1,0 +1,514 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Blagovest Petrov&#39;s blog">
+    <title>Perl in the office - Blagovest Petrov&#39;s blog</title>
+    <meta name="author" content="Blagovest Petrov">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Today Perl helped me again to solve a boring office problem. The colleagues gave me a presentation with almost 1000 slides. It was designed for a theatre subtitles. The slides was simple. Just a sent">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Perl in the office">
+<meta property="og:url" content="http://petrovs.info/2014/01/17/perl-in-the-office/index.html">
+<meta property="og:site_name" content="Blagovest Petrov's blog">
+<meta property="og:description" content="Today Perl helped me again to solve a boring office problem. The colleagues gave me a presentation with almost 1000 slides. It was designed for a theatre subtitles. The slides was simple. Just a sent">
+<meta property="og:image" content="http://imgs.xkcd.com/comics/regex_golf.png">
+<meta property="og:image" content="http://petrovs.info/!--￼4-->/images/PerlInTheOffice/foodotodt.png">
+<meta property="og:updated_time" content="2017-01-03T14:07:01.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perl in the office">
+<meta name="twitter:description" content="Today Perl helped me again to solve a boring office problem. The colleagues gave me a presentation with almost 1000 slides. It was designed for a theatre subtitles. The slides was simple. Just a sent">
+<meta name="twitter:image" content="http://imgs.xkcd.com/comics/regex_golf.png">
+<meta name="twitter:creator" content="@eniac111">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=640"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-jmppwtxqojdd59fujmtahmifbyjlghgbsyo4iyb4qt6wnumuaxijkggtpdo9.min.css">
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44632309-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+    
+
+<header id="header" data-behavior="3">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Blagovest Petrov&#39;s blog</a>
+    </h1>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=90"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+    
+
+<nav id="sidebar" data-behavior="3">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+            </a>
+            <span class="sidebar-profile-name">Blagovest Petrov</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-tags"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                    <span class="sidebar-button-desc">Tags</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                    <span class="sidebar-button-desc">Archives</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                    <span class="sidebar-button-desc">About</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">Github</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://twitter.com/eniac111" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+                    <span class="sidebar-button-desc">Twitter</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://linkedin.com/in/blpetrov" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+                    <span class="sidebar-button-desc">LinkedIn</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:blagovest@petrovs.info" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="3"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Perl in the office
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Fri Jan 17 2014 00:36:00 GMT+0200">
+	
+		    Jan 17, 2014
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Perl/">Perl</a>, <a class="category-link" href="/categories/Perl/Office/">Office</a>, <a class="category-link" href="/categories/Perl/Office/Dirty-Hacks/">Dirty Hacks</a>, <a class="category-link" href="/categories/Perl/Office/Dirty-Hacks/IT/">IT</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><a href="href="http://xkcd.com/1313/"" target="_BLANK"><img title="XKCD" src="http://imgs.xkcd.com/comics/regex_golf.png" style="border-width:0px;"></a></p>
+<p>Today Perl helped me again to solve a boring office problem. The colleagues gave me a presentation with almost 1000 slides. It was designed for a theatre subtitles. The slides was simple. Just a sentence per each slide. Only the colors was mistaken. Not black on white but white on black. My colleagues spent hours in googling for M$ Office bulk color change function. Then something blinked in me. <strong>It was Perl’s Regex {}</strong>.<br>The new open Office formats - <a href="http://en.wikipedia.org/wiki/OpenDocument" target="_blank" rel="external">ODF</a> and <a href="http://en.wikipedia.org/wiki/Office_Open_XML" target="_blank" rel="external">OOXML</a> are both zipped XML files, binary media content and files with metadata. I converted the presentation to odt (It was on the old crappy ppt) and then, just </p>
+<a id="more"></a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">lin:/tmp/presentation$ unzip slides.odp </div><div class="line">Archive:  slides.odp</div><div class="line"> extracting: mimetype                </div><div class="line">  inflating: content.xml             </div><div class="line">  inflating: META-INF/manifest.xml   </div><div class="line">  inflating: settings.xml            </div><div class="line">  inflating: styles.xml              </div><div class="line">  inflating: meta.xml                </div><div class="line">  inflating: Thumbnails/thumbnail.png  </div></pre></td></tr></table></figure>
+<p>The interesting file for me was <strong>content.xml</strong>. It’s a verry big XML text file, so it’s hard to be read both by a human and a text editor, but Sublime Text withstand. Because the slides were very simple, there was only one text style. So, here is the interesting stanza:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;/<span class="name">style:paragraph-properties</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style:text-properties</span> <span class="attr">fo:font-variant</span>=<span class="string">"normal"</span> <span class="attr">fo:text-transform</span>=<span class="string">"none"</span> <span class="attr">fo:color</span>=<span class="string">"#ffffff"</span> </span></div><div class="line"><span class="attr">style:text-line-through-type</span>=<span class="string">"none"</span> <span class="attr">style:text-line-through-style</span>=<span class="string">"none"</span> <span class="attr">style:text-line-through-width</span>=<span class="string">"auto"</span> </div><div class="line"><span class="attr">style:text-line-through-color</span>=<span class="string">"font-color"</span> <span class="attr">style:text-position</span>=<span class="string">"0% 100%"</span> <span class="attr">fo:font-size</span>=<span class="string">"0.25in"</span> <span class="attr">style:font-size-asian</span>=<span class="string">"0</span></div><div class="line">.25in" <span class="attr">style:font-size-complex</span>=<span class="string">"0.25in"</span> <span class="attr">fo:letter-spacing</span>=<span class="string">"0in"</span> <span class="attr">fo:font-style</span>=<span class="string">"normal"</span> <span class="attr">style:font-style-asian</span>=<span class="string">"normal"</span></div><div class="line"> <span class="attr">style:font-style-complex</span>=<span class="string">"normal"</span> <span class="attr">style:text-underline-type</span>=<span class="string">"none"</span> </div><div class="line"> <span class="attr">style:text-underline-style</span>=<span class="string">"none"</span> <span class="attr">style:text-underline-width</span>=<span class="string">"auto"</span> <span class="attr">style:text-underline-color</span>=<span class="string">"font-color"</span> </div><div class="line"> <span class="attr">fo:font-weight</span>=<span class="string">"normal"</span> <span class="attr">style:font-weight-asian</span>=<span class="string">"normal"</span> <span class="attr">style:font-weight-complex</span>=<span class="string">"normal"</span> </div><div class="line"> <span class="attr">style:text-underline-mode</span>=<span class="string">"continuous"</span> <span class="attr">style:letter-kerning</span>=<span class="string">"false"</span>/&gt;<span class="tag">&lt;/<span class="name">style:style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>I just changed <strong>‘ fo:color=”#ffffff” ‘</strong> to <strong>‘ fo:color=”#000000” ‘</strong> with a Perl oneliner:</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lin:<span class="regexp">/tmp/presentation</span>$ perl -p -i -e <span class="string">'s/fo:color=\"#ffffff\"/fo:color=\"#000000\"/g'</span> content.xml</div></pre></td></tr></table></figure>
+<p>And then, zip again..</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">lin:/tmp/presentation$ zip foo.odp content.xml meta.xml mimetype settings.xml styles.xml </div><div class="line">  adding: content.xml (deflated 97%)</div><div class="line">  adding: meta.xml (deflated 47%)</div><div class="line">  adding: mimetype (deflated 6%)</div><div class="line">  adding: settings.xml (deflated 37%)</div><div class="line">  adding: styles.xml (deflated 97%)</div><div class="line">lin:/tmp/presentation$ zip -r foo.odp META-INF</div><div class="line">  adding: META-INF/ (stored 0%)</div><div class="line">  adding: META-INF/manifest.xml (deflated 71%)</div><div class="line">lin:/tmp/presentation$ zip -r foo.odp Thumbnails</div><div class="line">  adding: Thumbnails/ (stored 0%)</div><div class="line">  adding: Thumbnails/thumbnail.png (deflated 4%)</div></pre></td></tr></table></figure>
+<p>And.. voilà! (The image is just an example. I cannot show the real one.)</p>
+<p><img src="!--￼4--&gt;/images/PerlInTheOffice/foodotodt.png" alt="picture alt" title="The slide, finnished">  </p>
+<p>PS: I changed the background from Powerpoint. It was easy in the GUI way :D</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/06/16/photosphere-of-the-slaveykov-hall/"  data-tooltip="Photosphere of the Slaveykov Hall">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/11/13/f-dot-b-purity/" data-tooltip="F.B. Purity">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Blagovest Petrov. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="3">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2014/06/16/photosphere-of-the-slaveykov-hall/"  data-tooltip="Photosphere of the Slaveykov Hall">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2013/11/13/f-dot-b-purity/" data-tooltip="F.B. Purity">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="3">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://petrovs.info/2014/01/17/perl-in-the-office/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        
+
+
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://www.gravatar.com/avatar/daf9d93e041487373711a572c3ed0cc8?s=110"/>
+        
+            <h4 id="about-card-name">Blagovest Petrov</h4>
+        
+            <h5 id="about-card-bio"><p>author.bio</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>author.job</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Sofia, Bulgaria
+            </h5>
+        
+    </div>
+</div>
+
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/scrip-iaehp5thor0pbqgcyblrct5rsvhmqrvbuwm0kto0ectv5cpss8ylmorjlrhv.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://petrovs.info/2014/01/17/perl-in-the-office/';
+                 this.page.identifier = '2014/01/17/perl-in-the-office/';
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'blagosblog';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+</html>
