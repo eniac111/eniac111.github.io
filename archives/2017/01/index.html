@@ -234,7 +234,7 @@
 <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
@@ -254,40 +254,23 @@
 </div>
             </div>
             
-                <div class="postShorten-thumbnailimg postShorten-thumbnailimg--bottom">
-                    <img alt="" itemprop="image" src="http://petrovs.info/2017/01/03/Open-data-of-SofiaTraffic/background.jpg"/>
-                </div>
-                
             
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>Quick post, first for 2017.<br>I got an Android car PC computer for Christmas and the hacking ideas began to appear.<br>Because most the buffer parkings near the Sofia subway stations are full from early in the morning, I always have to have to do a lot of maneuvers with the car. It would be great if the car PC warns me about the free places around 1km away from the parking every morning, based on the GPS. I tried to find something some usable open information about the parkings on internet but there is nothing except this application for Android: <a href="https://play.google.com/store/apps/details?id=bg.cgm.parkingboards&amp;hl=bg" target="_blank" rel="external">София Паркинг</a>. It’s only showing the free places in some blue zone parkigs in the centre of Sofia. The application is usable but not suitable for 2-din car PC. So, it wasn’t so hard to find from where it gets the data:</p>
-<h3 id="https-213-240-235-145-web-site-service-rest-parkingBoardsRequest-allFreePlaces"><a href="#https-213-240-235-145-web-site-service-rest-parkingBoardsRequest-allFreePlaces" class="headerlink" title="https://213.240.235.145/web-site-service/rest/parkingBoardsRequest/allFreePlaces"></a><em><a href="https://213.240.235.145/web-site-service/rest/parkingBoardsRequest/allFreePlaces" target="_blank" rel="external">https://213.240.235.145/web-site-service/rest/parkingBoardsRequest/allFreePlaces</a></em></h3><p>The certificate of the page is expired but it’s not a big deal. The application looks a bit unmaintained. The last update was in 2014. The page returns this JSON:</p>
-<figure class="highlight json"><figcaption><span>Example parking data</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"parkingRes"</span>: [</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"1"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"71"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"2"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"FULL"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"3"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"FULL"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"4"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"2"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"5"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"8"</span></div><div class="line">		&#125;,</div><div class="line">		&#123;</div><div class="line">			<span class="attr">"code"</span>: <span class="string">"6"</span>,</div><div class="line">			<span class="attr">"datetimeChecked"</span>: <span class="string">"2017-01-30 13:57:52"</span>,</div><div class="line">			<span class="attr">"freePlaces"</span>: <span class="string">"12"</span></div><div class="line">		&#125;</div><div class="line">	]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>The codes refers to the following locations:</p>
-<ol>
-<li>Храм-паметник Ал. Невски</li>
-<li>пл. Княз Александър I</li>
-<li>бул. П. Евтимий</li>
-<li>пл. Народно събрание</li>
-<li>ул. Гурко - Телефонна палата</li>
-<li>бул. Ал. Стамболийски</li>
-</ol>
-
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Quick post, first for 2017.<br>I got an Android car PC computer for Christmas and the hacking ideas began to appear.<br>
                     
+                        <a href="/2017/01/03/Open-data-of-SofiaTraffic/" class="postShorten-excerpt_link link">
+                            Continue reading
+                        </a>
                         
-
-                    
-                    
-                        <p>
-                            <a href="/2017/01/03/Open-data-of-SofiaTraffic/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
                     
                 </div>
             
         </div>
+        
+            <div class="postShorten-thumbnailimg">
+                <img alt="" itemprop="image" src="http://petrovs.info/2017/01/03/Open-data-of-SofiaTraffic/background.jpg"/>
+            </div>
+            
         
     </article>
     
